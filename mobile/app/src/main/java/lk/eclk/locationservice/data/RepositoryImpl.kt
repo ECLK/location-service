@@ -1,5 +1,3 @@
 package lk.eclk.locationservice.data
 
-class RepositoryImpl() : Repository{
-
-}
+class RepositoryImpl() : Repository {}
