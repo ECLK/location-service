@@ -1,7 +1,8 @@
-package lk.eclk.locationservice
+package lk.eclk.locationservice.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import lk.eclk.locationservice.R
 
 class MainActivity : AppCompatActivity() {
 
