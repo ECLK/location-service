@@ -15,3 +15,23 @@ class Media_itemsSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Media_items
         fields = '__all__'
+
+class DistrictSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.District
+        fields = '__all__'
+
+class ElectroaldistrictSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Electroaldistrict
+        fields = '__all__'
+
+class PolingdivisionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Polingdivision
+        fields = '__all__'
+
+class GramaniladaridivisionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Gramaniladaridivision
+        fields = '__all__'
