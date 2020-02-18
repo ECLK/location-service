@@ -16,9 +16,9 @@ class Media_itemsSerializer(serializers.ModelSerializer):
         model = models.Media_items
         fields = '__all__'
 
-class DistrictSerializer(serializers.ModelSerializer):
+class AdmindistrictSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.District
+        model = models.Admindistrict
         fields = '__all__'
 
 class ElectroaldistrictSerializer(serializers.ModelSerializer):
