@@ -9,6 +9,7 @@ import lk.eclk.locationservice.data.proviers.JWTProviderImpl
 import lk.eclk.locationservice.data.remote.ConnectivityInterceptor
 import lk.eclk.locationservice.data.remote.ConnectivityInterceptorImpl
 import lk.eclk.locationservice.data.remote.api.LocationServiceApiService
+import lk.eclk.locationservice.ui.signin.SignInViewModelFactory
 import lk.eclk.locationservice.ui.splash.SplashScreenViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -47,5 +48,6 @@ class LocationServiceApplication : Application(), KodeinAware {
 
         //view model factories
         bind() from provider { SplashScreenViewModelFactory(instance()) }
+        bind() from provider { SignInViewModelFactory(instance()) }
     }
 }

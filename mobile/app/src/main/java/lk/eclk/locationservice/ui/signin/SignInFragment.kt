@@ -13,7 +13,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
-class SignInFragment : Fragment(),KodeinAware {
+class SignInFragment : Fragment(), KodeinAware {
 
     override val kodein: Kodein by closestKodein()
     private lateinit var viewModel: SignInViewModel
@@ -24,13 +24,12 @@ class SignInFragment : Fragment(),KodeinAware {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.signin_fragment, container, false)
+        return inflater.inflate(R.layout.sign_in_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this,viewModelFactory).get(SignInViewModel::class.java)
-        // TODO: Use the ViewModel
+        viewModel = ViewModelProvider(this, viewModelFactory).get(SignInViewModel::class.java)
     }
 
 }

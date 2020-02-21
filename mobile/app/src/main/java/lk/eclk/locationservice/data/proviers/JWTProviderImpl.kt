@@ -9,13 +9,13 @@ private const val JWT_TOKEN = "jwt_token"
 
 class JWTProviderImpl(context: Context) : PreferenceProvider(context), JWTProvider {
 
+    // any view model can observe auth state using this live data
+    override val authState: LiveData<AuthState> get() = _authState
+    private val _authState by lazy { MutableLiveData<AuthState>() }
+
     init {
         setAuthState(getJWT())
     }
-
-    // any view model can observe auth state using this live data
-    override val authState: LiveData<AuthState> get() = _authState
-    private val _authState = MutableLiveData<AuthState>()
 
     override fun getJWT(): String? {
         return preference.getString(JWT_TOKEN, null)

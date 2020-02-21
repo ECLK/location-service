@@ -9,6 +9,6 @@ class SignInViewModelFactory(private val repository: Repository) :
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return SignInViewModelFactory(repository) as T
+        return SignInViewModel(repository) as T
     }
 }

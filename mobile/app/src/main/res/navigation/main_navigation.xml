@@ -9,14 +9,20 @@
         android:id="@+id/splashScreenFragment"
         android:name="lk.eclk.locationservice.ui.splash.SplashScreenFragment"
         android:label="splash_screen_fragment"
-        tools:layout="@layout/splash_screen_fragment" >
+        tools:layout="@layout/splash_screen_fragment">
+
         <action
             android:id="@+id/action_splashScreenFragment_to_signInFragment"
-            app:destination="@id/signInFragment" />
+            app:destination="@id/signInFragment"
+            app:enterAnim="@anim/slide_in_down"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_down" />
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
         android:name="lk.eclk.locationservice.ui.signin.SignInFragment"
-        android:label="signin_fragment"
-        tools:layout="@layout/signin_fragment" />
+        android:label="sign_in_fragment"
+        tools:layout="@layout/sign_in_fragment" />
+
 </navigation>
