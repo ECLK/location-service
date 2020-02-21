@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
 import lk.eclk.locationservice.R
@@ -28,5 +29,13 @@ class SplashScreenFragment : Fragment(),KodeinAware {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this,viewModelFactory).get(SplashScreenViewModel::class.java)
+        bindUI()
+    }
+
+    private fun bindUI() {
+        viewModel.authState.observe(this, Observer {
+            if(it == null) return@Observer
+
+        })
     }
 }

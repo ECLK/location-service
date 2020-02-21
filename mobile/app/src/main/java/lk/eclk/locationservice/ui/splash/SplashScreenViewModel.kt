@@ -4,5 +4,5 @@ import androidx.lifecycle.ViewModel
 import lk.eclk.locationservice.data.Repository
 
 class SplashScreenViewModel(private val repository: Repository) : ViewModel() {
-
+    val authState by lazy { repository.getAuthState() }
 }
