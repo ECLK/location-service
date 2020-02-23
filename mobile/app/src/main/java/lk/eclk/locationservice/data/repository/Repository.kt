@@ -1,4 +1,4 @@
-package lk.eclk.locationservice.data
+package lk.eclk.locationservice.data.repository
 
 import androidx.lifecycle.LiveData
 import lk.eclk.locationservice.internal.AuthState

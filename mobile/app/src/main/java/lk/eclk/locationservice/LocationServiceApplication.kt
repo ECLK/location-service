@@ -1,14 +1,16 @@
 package lk.eclk.locationservice
 
 import android.app.Application
-import lk.eclk.locationservice.data.Repository
-import lk.eclk.locationservice.data.RepositoryImpl
+import lk.eclk.locationservice.data.repository.Repository
+import lk.eclk.locationservice.data.repository.RepositoryImpl
 import lk.eclk.locationservice.data.db.AppDatabase
 import lk.eclk.locationservice.data.proviers.JWTProvider
 import lk.eclk.locationservice.data.proviers.JWTProviderImpl
-import lk.eclk.locationservice.data.remote.ConnectivityInterceptor
-import lk.eclk.locationservice.data.remote.ConnectivityInterceptorImpl
+import lk.eclk.locationservice.data.remote.interceptors.ConnectivityInterceptor
+import lk.eclk.locationservice.data.remote.interceptors.ConnectivityInterceptorImpl
 import lk.eclk.locationservice.data.remote.api.LocationServiceApiService
+import lk.eclk.locationservice.data.remote.interceptors.AuthenticityInterceptor
+import lk.eclk.locationservice.data.remote.interceptors.AuthenticityInterceptorImpl
 import lk.eclk.locationservice.ui.home.HomeViewModelFactory
 import lk.eclk.locationservice.ui.signin.SignInViewModelFactory
 import lk.eclk.locationservice.ui.splash.SplashScreenViewModelFactory
@@ -35,17 +37,19 @@ class LocationServiceApplication : Application(), KodeinAware {
         //providers
         bind<JWTProvider>() with singleton { JWTProviderImpl(instance()) }
 
-        bind<ConnectivityInterceptor>() with singleton {
-            ConnectivityInterceptorImpl(
+        //interceptors
+        bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
+        bind<AuthenticityInterceptor>() with singleton { AuthenticityInterceptorImpl() }
+
+        // api services
+        bind() from singleton { LocationServiceApiService(instance(), instance(),instance()) }
+
+        //Repository
+        bind<Repository>() with singleton {
+            RepositoryImpl(
                 instance()
             )
         }
-
-        // api services
-        bind() from singleton { LocationServiceApiService(instance()) }
-
-        //Repository
-        bind<Repository>() with singleton { RepositoryImpl(instance()) }
 
         //view model factories
         bind() from provider { SplashScreenViewModelFactory(instance()) }

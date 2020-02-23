@@ -2,7 +2,7 @@ package lk.eclk.locationservice.ui.signin
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import lk.eclk.locationservice.data.Repository
+import lk.eclk.locationservice.data.repository.Repository
 
 class SignInViewModelFactory(private val repository: Repository) :
     ViewModelProvider.NewInstanceFactory() {
