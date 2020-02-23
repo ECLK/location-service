@@ -9,6 +9,8 @@ import lk.eclk.locationservice.data.proviers.JWTProviderImpl
 import lk.eclk.locationservice.data.remote.interceptors.ConnectivityInterceptor
 import lk.eclk.locationservice.data.remote.interceptors.ConnectivityInterceptorImpl
 import lk.eclk.locationservice.data.remote.api.LocationServiceApiService
+import lk.eclk.locationservice.data.remote.datasources.AuthenticationNetworkDataSource
+import lk.eclk.locationservice.data.remote.datasources.AuthenticationNetworkDataSourceImpl
 import lk.eclk.locationservice.data.remote.interceptors.AuthenticityInterceptor
 import lk.eclk.locationservice.data.remote.interceptors.AuthenticityInterceptorImpl
 import lk.eclk.locationservice.ui.home.HomeViewModelFactory
@@ -44,9 +46,17 @@ class LocationServiceApplication : Application(), KodeinAware {
         // api services
         bind() from singleton { LocationServiceApiService(instance(), instance(),instance()) }
 
+        //data sources - network
+        bind<AuthenticationNetworkDataSource>() with singleton {
+            AuthenticationNetworkDataSourceImpl(
+                instance()
+            )
+        }
+
         //Repository
         bind<Repository>() with singleton {
             RepositoryImpl(
+                instance(),
                 instance()
             )
         }

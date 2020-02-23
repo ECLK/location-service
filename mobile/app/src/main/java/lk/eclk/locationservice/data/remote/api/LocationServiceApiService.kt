@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit
 interface LocationServiceApiService {
 
     @FormUrlEncoded
-    @POST("/api/token/")
+    @POST("api/token/")
     fun signIn(
         @Field("username") username: String,
         @Field("password") password: String

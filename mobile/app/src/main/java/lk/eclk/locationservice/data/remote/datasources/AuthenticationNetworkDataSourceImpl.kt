@@ -23,7 +23,7 @@ class AuthenticationNetworkDataSourceImpl(private val apiService: LocationServic
             Log.e("Authentication", "401.", e)
             Pair(null, AuthResponseState.UNAUTHENTICATED)
         } catch (e: Exception) {
-            Log.e("Other error", "other error", e)
+            Log.e("Other error", "other error,${e.message}", e)
             Pair(null, AuthResponseState.ERROR)
         }
     }
