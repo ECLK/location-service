@@ -46,6 +46,7 @@ class SearchLocation(mixins.ListModelMixin,mixins.RetrieveModelMixin,viewsets.Ge
     permission_classes = (IsAuthenticated,)
     queryset = Locations.objects.all()
     serializer_class = LocationsSerializer
+    pagination_class = PageNumberPagination
     filter_backends = [SearchFilter]
     search_fields = ['code', 'name_sinhala','name_tamil','name_english','gdn__gnd_code', 'gdn__name_english','gdn__name_sinhala','gdn__name_tamil','gdn__polingdivision__name_english','gdn__polingdivision__name_tamil','gdn__polingdivision__name_sinhala','gdn__polingdivision__id','gdn__polingdivision__electoral_district__name_sinhala','gdn__polingdivision__electoral_district__name_english','gdn__polingdivision__electoral_district__name_tamil','gdn__polingdivision__electoral_district__id']
 
