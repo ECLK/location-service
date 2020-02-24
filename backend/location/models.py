@@ -2,7 +2,6 @@ from django.db import models
 
 # Create your models here.
 
-
 class Electroaldistrict(models.Model):
     name_sinhala=models.CharField(max_length=100)
     name_tamil=models.CharField(max_length=100)
@@ -20,7 +19,6 @@ class Admindistrict(models.Model):
     created_time=models.DateTimeField(auto_now_add= True)
     updated_time=models.DateTimeField(auto_now= True)
 
-
 class Polingdivision(models.Model):
     name_sinhala=models.CharField(max_length=100)
     name_tamil=models.CharField(max_length=100)
@@ -31,7 +29,7 @@ class Polingdivision(models.Model):
     updated_time=models.DateTimeField(auto_now= True)
 
 class Gramaniladaridivision(models.Model):
-    gnd_code=models.CharField(max_length=50)
+    gnd_code=models.CharField(max_length=15, primary_key=True)
     name_sinhala=models.CharField(max_length=100)
     name_tamil=models.CharField(max_length=100)
     name_english=models.CharField(max_length=100)
