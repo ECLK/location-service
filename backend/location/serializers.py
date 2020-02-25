@@ -41,3 +41,45 @@ class Media_itemsSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Media_items
         fields = '__all__'
+
+class MinistriesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=models.Ministries
+        fields = ('id','name_sinhala','name_tamil','name_english','status')
+
+class CommissionsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=models.Commissions
+        fields = ('id','name_sinhala','name_tamil','name_english','status')
+
+class LocalAuthoritiesSerializer(serializers.ModelSerializer):
+    electoral_district=ElectroaldistrictSerializer(many=False)
+    class Meta:
+        model=models.LocalAuthorities
+        fields = ('id','name_sinhala','name_tamil','name_english','electoral_district','status')
+
+class DepartmentsSerializer(serializers.ModelSerializer):
+    ministry=MinistriesSerializer(many=False)
+    class Meta:
+        model=models.Departments
+        fields = ('id','name_sinhala','name_tamil','name_english','ministry','status')
+
+class BranchesSerializer(serializers.ModelSerializer):
+    department=DepartmentsSerializer(many=False)
+    class Meta:
+        model=models.Branches
+        fields = ('id','name_sinhala','name_tamil','name_english','department','status')
+
+
+class DivisionalsecretariatsSerializer(serializers.ModelSerializer):
+    admin_district=AdmindistrictSerializer(many=False)
+    class Meta:
+        model=models.Divisionalsecretariats
+        fields = ('id','name_sinhala','name_tamil','name_english','admin_district','status')
+
+class ProvincialcouncilsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=models.Provincialcouncils
+        fields = ('id','name_sinhala','name_tamil','name_english','status')
+
+
