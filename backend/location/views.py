@@ -2,11 +2,12 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework import viewsets
 from rest_framework import mixins
 from rest_framework.permissions import IsAuthenticated
-from .models import Admindistrict, Electroaldistrict, Polingdivision, Gramaniladaridivision, Locations,Media_items
-from .serializers import AdmindistrictSerializer, ElectroaldistrictSerializer, PolingdivisionSerializer, GramaniladaridivisionSerializer, LocationsSerializer, Media_itemsSerializer
+from .models import Admindistrict, Electroaldistrict, Polingdivision, Gramaniladaridivision, Locations,Media_items, Ministries, Commissions, LocalAuthorities, Departments, Branches, Divisionalsecretariats, Provincialcouncils
+from .serializers import AdmindistrictSerializer, ElectroaldistrictSerializer, PolingdivisionSerializer, GramaniladaridivisionSerializer, LocationsSerializer, Media_itemsSerializer, MinistriesSerializer, CommissionsSerializer, LocalAuthoritiesSerializer, DepartmentsSerializer, BranchesSerializer, DivisionalsecretariatsSerializer, ProvincialcouncilsSerializer
 from rest_framework.parsers import FileUploadParser
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.response import Response
+
 # Create your views here.
 
 class AdmindistrictViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
@@ -49,6 +50,52 @@ class SearchLocation(mixins.ListModelMixin,mixins.RetrieveModelMixin,viewsets.Ge
     filter_backends = [SearchFilter]
     search_fields = ['code', 'name_sinhala','name_tamil','name_english','gdn__gnd_code', 'gdn__name_english','gdn__name_sinhala','gdn__name_tamil','gdn__polingdivision__name_english','gdn__polingdivision__name_tamil','gdn__polingdivision__name_sinhala','gdn__polingdivision__id','gdn__polingdivision__electoral_district__name_sinhala','gdn__polingdivision__electoral_district__name_english','gdn__polingdivision__electoral_district__name_tamil','gdn__polingdivision__electoral_district__id']
     pagination_class = PageNumberPagination
+
+class MinistriesViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
+    permission_classes = (IsAuthenticated,)
+    queryset = Ministries.objects.all()
+    serializer_class = MinistriesSerializer
+    pagination_class = PageNumberPagination
+
+class CommissionsViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
+    permission_classes = (IsAuthenticated,)
+    queryset = Commissions.objects.all()
+    serializer_class = CommissionsSerializer
+    pagination_class = PageNumberPagination
+
+class LocalAuthoritiesViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
+    permission_classes = (IsAuthenticated,)
+    queryset = LocalAuthorities.objects.all()
+    serializer_class = LocalAuthoritiesSerializer
+    pagination_class = PageNumberPagination
+
+class DepartmentsViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
+    permission_classes = (IsAuthenticated,)
+    queryset = Departments.objects.all()
+    serializer_class = DepartmentsSerializer
+    pagination_class = PageNumberPagination
+
+class BranchesViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
+    permission_classes = (IsAuthenticated,)
+    queryset = Branches.objects.all()
+    serializer_class = BranchesSerializer
+    pagination_class = PageNumberPagination
+
+class DivisionalsecretariatsViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
+    permission_classes = (IsAuthenticated,)
+    queryset = Divisionalsecretariats.objects.all()
+    serializer_class = DivisionalsecretariatsSerializer
+    pagination_class = PageNumberPagination
+
+class ProvincialcouncilsViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
+    permission_classes = (IsAuthenticated,)
+    queryset = Provincialcouncils.objects.all()
+    serializer_class = ProvincialcouncilsSerializer
+    pagination_class = PageNumberPagination
+
+
+
+
 
     
     
