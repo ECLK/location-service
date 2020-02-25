@@ -2,10 +2,16 @@ from django.db import models
 
 # Create your models here.
 
+class Provincialcouncils(models.Model):
+    name_sinhala=models.CharField(max_length=200)
+    name_tamil=models.CharField(max_length=200)
+    name_english=models.CharField(max_length=200)
+    status=models.BooleanField(default=True)
 class Electroaldistrict(models.Model):
     name_sinhala=models.CharField(max_length=100)
     name_tamil=models.CharField(max_length=100)
     name_english=models.CharField(max_length=100)
+    provice=models.ForeignKey(Provincialcouncils, on_delete=models.CASCADE)
     ed_status=models.BooleanField(default=True)
     created_time=models.DateTimeField(auto_now_add= True)
     updated_time=models.DateTimeField(auto_now= True)
@@ -71,5 +77,60 @@ class Media_items(models.Model):
     status=models.BooleanField(default=True)
     created_time=models.DateTimeField(auto_now_add= True)
     updated_time=models.DateTimeField(auto_now= True)
+
+class Ministries(models.Model):
+    name_sinhala=models.CharField(max_length=200)
+    name_tamil=models.CharField(max_length=200)
+    name_english=models.CharField(max_length=200)
+    status=models.BooleanField(default=True)
+    created_time=models.DateTimeField(auto_now_add= True)
+    updated_time=models.DateTimeField(auto_now= True)
+
+class Commissions(models.Model):
+    name_sinhala=models.CharField(max_length=200)
+    name_tamil=models.CharField(max_length=200)
+    name_english=models.CharField(max_length=200)
+    status=models.BooleanField(default=True)
+    created_time=models.DateTimeField(auto_now_add= True)
+    updated_time=models.DateTimeField(auto_now= True)
+
+class LocalAuthorities(models.Model):
+    name_sinhala=models.CharField(max_length=200)
+    name_tamil=models.CharField(max_length=200)
+    name_english=models.CharField(max_length=200)
+    electoral_district=models.ForeignKey(Electroaldistrict, on_delete=models.CASCADE)
+    status=models.BooleanField(default=True)
+    created_time=models.DateTimeField(auto_now_add= True)
+    updated_time=models.DateTimeField(auto_now= True)
+class Departments(models.Model):
+    name_sinhala=models.CharField(max_length=200)
+    name_tamil=models.CharField(max_length=200)
+    name_english=models.CharField(max_length=200)
+    ministry=models.ForeignKey(Ministries, on_delete=models.CASCADE, blank=True, null=True)
+    status=models.BooleanField(default=True)
+    created_time=models.DateTimeField(auto_now_add= True)
+    updated_time=models.DateTimeField(auto_now= True)
+
+class Branches(models.Model):
+    name_sinhala=models.CharField(max_length=200)
+    name_tamil=models.CharField(max_length=200)
+    name_english=models.CharField(max_length=200)
+    department=models.ForeignKey(Departments, on_delete=models.CASCADE, blank=True, null=True)
+    status=models.BooleanField(default=True)
+    created_time=models.DateTimeField(auto_now_add= True)
+    updated_time=models.DateTimeField(auto_now= True)
+
+class Divisionalsecretariats(models.Model):
+    name_sinhala=models.CharField(max_length=200)
+    name_tamil=models.CharField(max_length=200)
+    name_english=models.CharField(max_length=200)
+    admin_district=models.ForeignKey(Ministries, on_delete=models.CASCADE)
+    status=models.BooleanField(default=True)
+    created_time=models.DateTimeField(auto_now_add= True)
+    updated_time=models.DateTimeField(auto_now= True)
+
+
+
+
 
 
