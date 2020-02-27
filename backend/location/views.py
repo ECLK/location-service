@@ -43,6 +43,7 @@ class MideaItemViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.Retr
     parser_class = (FileUploadParser,)
     serializer_class = Media_itemsSerializer
     pagination_class = PageNumberPagination
+
 class SearchLocation(mixins.ListModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Locations.objects.all()
@@ -92,16 +93,4 @@ class ProvincialcouncilsViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mi
     queryset = Provincialcouncils.objects.all()
     serializer_class = ProvincialcouncilsSerializer
     pagination_class = PageNumberPagination
-
-
-
-
-
-    
-    
-    
-
-    
-    
-
 

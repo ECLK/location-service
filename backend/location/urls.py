@@ -18,5 +18,4 @@ router.register('departments', DepartmentsViewset)
 router.register('branches', BranchesViewset)
 router.register('divisionalsecretariats', DivisionalsecretariatsViewset)
 
-
 urlpatterns = router.urls

@@ -81,5 +81,3 @@ class ProvincialcouncilsSerializer(serializers.ModelSerializer):
     class Meta:
         model=models.Provincialcouncils
         fields = ('id','name_sinhala','name_tamil','name_english','status')
-
-

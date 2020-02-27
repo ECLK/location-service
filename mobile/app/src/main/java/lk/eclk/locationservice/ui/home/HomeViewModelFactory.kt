@@ -1,14 +1,14 @@
-package lk.eclk.locationservice.ui.signin
+package lk.eclk.locationservice.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import lk.eclk.locationservice.data.repository.Repository
 
-class SignInViewModelFactory(private val repository: Repository) :
+class HomeViewModelFactory(private val repository: Repository) :
     ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return SignInViewModel(repository) as T
+        return HomeViewModel(repository) as T
     }
 }

@@ -1,8 +1,8 @@
-package lk.eclk.locationservice.data.remote
+package lk.eclk.locationservice.data.remote.interceptors
 
 import android.content.Context
 import android.net.ConnectivityManager
-import lk.eclk.locationservice.data.remote.ConnectivityInterceptor
+import lk.eclk.locationservice.data.remote.interceptors.ConnectivityInterceptor
 import lk.eclk.locationservice.internal.NoConnectivityException
 import okhttp3.Interceptor
 import okhttp3.Response

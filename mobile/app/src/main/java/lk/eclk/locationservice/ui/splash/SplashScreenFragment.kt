@@ -42,6 +42,7 @@ class SplashScreenFragment : Fragment(), KodeinAware {
             if (it == null) return@Observer
             when (it) {
                 AuthState.NEED_LOGIN -> navController.navigate(R.id.action_splashScreenFragment_to_signInFragment)
+                AuthState.LOGGED_IN -> navController.navigate(R.id.action_splashScreenFragment_to_homeFragment)
             }
         })
     }
