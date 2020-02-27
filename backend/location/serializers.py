@@ -1,10 +1,36 @@
 from rest_framework import serializers
 from . import models
 
+class ElectroaldistrictSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = models.Electroaldistrict
+        fields = ('id','name_sinhala','name_tamil','name_english', 'ed_status')
+
+class AdmindistrictSerializer(serializers.ModelSerializer):
+    electoral_district=ElectroaldistrictSerializer(many=False)
+    class Meta:
+        model = models.Admindistrict
+        fields = ('id','name_sinhala','name_tamil','name_english','electoral_district','district_status')
+
+
+class PolingdivisionSerializer(serializers.ModelSerializer):
+    electoral_district=ElectroaldistrictSerializer(many=False)
+    class Meta:
+        model = models.Polingdivision
+        fields = ('id','name_sinhala','name_tamil','name_english','pd_status','electoral_district')
+
+class GramaniladaridivisionSerializer(serializers.ModelSerializer):
+    polingdivision=PolingdivisionSerializer(many=False)
+    class Meta:
+        model = models.Gramaniladaridivision
+        fields = ('gnd_code','name_sinhala','name_tamil','name_english','polingdivision','gdn_status')
+
 class LocationsSerializer(serializers.ModelSerializer):
+    gdn=GramaniladaridivisionSerializer(many=False)
     class Meta:
         model = models.Locations
-        fields = '__all__'
+        fields = ('code','name_sinhala','name_tamil','name_english','coordinate_east','coordinate_north','latitude','longitute','gdn','location_status')
 
 class Location_contactsSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,22 +42,42 @@ class Media_itemsSerializer(serializers.ModelSerializer):
         model = models.Media_items
         fields = '__all__'
 
-class AdmindistrictSerializer(serializers.ModelSerializer):
+class MinistriesSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Admindistrict
-        fields = '__all__'
+        model=models.Ministries
+        fields = ('id','name_sinhala','name_tamil','name_english','status')
 
-class ElectroaldistrictSerializer(serializers.ModelSerializer):
+class CommissionsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Electroaldistrict
-        fields = '__all__'
+        model=models.Commissions
+        fields = ('id','name_sinhala','name_tamil','name_english','status')
 
-class PolingdivisionSerializer(serializers.ModelSerializer):
+class LocalAuthoritiesSerializer(serializers.ModelSerializer):
+    electoral_district=ElectroaldistrictSerializer(many=False)
     class Meta:
-        model = models.Polingdivision
-        fields = '__all__'
+        model=models.LocalAuthorities
+        fields = ('id','name_sinhala','name_tamil','name_english','electoral_district','status')
 
-class GramaniladaridivisionSerializer(serializers.ModelSerializer):
+class DepartmentsSerializer(serializers.ModelSerializer):
+    ministry=MinistriesSerializer(many=False)
     class Meta:
-        model = models.Gramaniladaridivision
-        fields = '__all__'
+        model=models.Departments
+        fields = ('id','name_sinhala','name_tamil','name_english','ministry','status')
+
+class BranchesSerializer(serializers.ModelSerializer):
+    department=DepartmentsSerializer(many=False)
+    class Meta:
+        model=models.Branches
+        fields = ('id','name_sinhala','name_tamil','name_english','department','status')
+
+
+class DivisionalsecretariatsSerializer(serializers.ModelSerializer):
+    admin_district=AdmindistrictSerializer(many=False)
+    class Meta:
+        model=models.Divisionalsecretariats
+        fields = ('id','name_sinhala','name_tamil','name_english','admin_district','status')
+
+class ProvincialcouncilsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=models.Provincialcouncils
+        fields = ('id','name_sinhala','name_tamil','name_english','status')
