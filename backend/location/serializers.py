@@ -82,4 +82,27 @@ class ProvincialcouncilsSerializer(serializers.ModelSerializer):
         model=models.Provincialcouncils
         fields = ('id','name_sinhala','name_tamil','name_english','status')
 
+class PolicedivisionsSerializer(serializers.ModelSerializer):
+    provice=ProvincialcouncilsSerializer(many=False)
+    class Meta:
+        model=models.Policedivisions
+        fields = ('id','name_sinhala','name_tamil','name_english','provice','status')
 
+class PolicestationsSerializer(serializers.ModelSerializer):
+    police_division=PolicedivisionsSerializer(many=False)
+    class Meta:
+        model=models.Policestations
+        fields = ('id','name_sinhala','name_tamil','name_english','police_division','status')
+
+
+class ProvincialministriesSerializer(serializers.ModelSerializer):
+    province=ProvincialcouncilsSerializer(many=False)
+    class Meta:
+        model=models.Provincialministries
+        fields = ('id','name_sinhala','name_tamil','name_english','province','status')
+
+class ProvincialministrydemartmentsSerializer(serializers.ModelSerializer):
+    province=ProvincialministriesSerializer(many=False)
+    class Meta:
+        model=models.Provincialministrydemartments
+        fields = ('id','name_sinhala','name_tamil','name_english','province_ministry','status')
