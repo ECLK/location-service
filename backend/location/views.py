@@ -2,8 +2,8 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework import viewsets
 from rest_framework import mixins
 from rest_framework.permissions import IsAuthenticated
-from .models import Admindistrict, Electroaldistrict, Polingdivision, Gramaniladaridivision, Locations,Media_items, Ministries, Commissions, LocalAuthorities, Departments, Branches, Divisionalsecretariats, Provincialcouncils
-from .serializers import AdmindistrictSerializer, ElectroaldistrictSerializer, PolingdivisionSerializer, GramaniladaridivisionSerializer, LocationsSerializer, Media_itemsSerializer, MinistriesSerializer, CommissionsSerializer, LocalAuthoritiesSerializer, DepartmentsSerializer, BranchesSerializer, DivisionalsecretariatsSerializer, ProvincialcouncilsSerializer
+from .models import Admindistrict, Electroaldistrict, Polingdivision, Gramaniladaridivision, Locations,Media_items, Ministries, Commissions, LocalAuthorities, Departments, Branches, Divisionalsecretariats, Provincialcouncils, Policedivisions, Policestations, Provincialministries, Provincialministrydemartments
+from .serializers import AdmindistrictSerializer, ElectroaldistrictSerializer, PolingdivisionSerializer, GramaniladaridivisionSerializer, LocationsSerializer, Media_itemsSerializer, MinistriesSerializer, CommissionsSerializer, LocalAuthoritiesSerializer, DepartmentsSerializer, BranchesSerializer, DivisionalsecretariatsSerializer, ProvincialcouncilsSerializer, PolicedivisionsSerializer, PolicestationsSerializer, ProvincialministriesSerializer, ProvincialministrydemartmentsSerializer
 from rest_framework.parsers import FileUploadParser
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.response import Response
@@ -92,6 +92,31 @@ class ProvincialcouncilsViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mi
     queryset = Provincialcouncils.objects.all()
     serializer_class = ProvincialcouncilsSerializer
     pagination_class = PageNumberPagination
+
+class PolicedivisionsViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
+    permission_classes = (IsAuthenticated,)
+    queryset = Policedivisions.objects.all()
+    serializer_class = PolicedivisionsSerializer
+    pagination_class = PageNumberPagination
+
+class PolicestationsViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
+    permission_classes = (IsAuthenticated,)
+    queryset = Policestations.objects.all()
+    serializer_class = PolicestationsSerializer
+    pagination_class = PageNumberPagination
+
+class ProvincialministriesViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
+    permission_classes = (IsAuthenticated,)
+    queryset = Provincialministries.objects.all()
+    serializer_class = ProvincialministriesSerializer
+    pagination_class = PageNumberPagination
+
+class ProvincialministrydemartmentsViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
+    permission_classes = (IsAuthenticated,)
+    queryset = Provincialministrydemartments.objects.all()
+    serializer_class = ProvincialministrydemartmentsSerializer
+    pagination_class = PageNumberPagination
+
 
 
 
