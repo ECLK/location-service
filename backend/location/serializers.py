@@ -81,6 +81,7 @@ class ProvincialcouncilsSerializer(serializers.ModelSerializer):
     class Meta:
         model=models.Provincialcouncils
         fields = ('id','name_sinhala','name_tamil','name_english','status')
+<<<<<<< HEAD
 
 class PolicedivisionsSerializer(serializers.ModelSerializer):
     provice=ProvincialcouncilsSerializer(many=False)
@@ -106,3 +107,5 @@ class ProvincialministrydemartmentsSerializer(serializers.ModelSerializer):
     class Meta:
         model=models.Provincialministrydemartments
         fields = ('id','name_sinhala','name_tamil','name_english','province_ministry','status')
+=======
+>>>>>>> a44f7984ad282c2b8008e716b9c2af303f5781f2

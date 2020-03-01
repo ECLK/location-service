@@ -21,5 +21,4 @@ router.register('policedivisions', PolicedivisionsViewset)
 router.register('provincialministries', ProvincialministriesViewset)
 router.register('provicialdepartments', ProvincialministrydemartmentsViewset)
 
-
 urlpatterns = router.urls

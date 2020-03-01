@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'location',
     'rest_framework_simplejwt',
     'djoser',
-   
 ]
 
 MIDDLEWARE = [

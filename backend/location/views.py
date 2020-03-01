@@ -43,6 +43,7 @@ class MideaItemViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.Retr
     parser_class = (FileUploadParser,)
     serializer_class = Media_itemsSerializer
     pagination_class = PageNumberPagination
+
 class SearchLocation(mixins.ListModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Locations.objects.all()
@@ -93,6 +94,7 @@ class ProvincialcouncilsViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mi
     serializer_class = ProvincialcouncilsSerializer
     pagination_class = PageNumberPagination
 
+<<<<<<< HEAD
 class PolicedivisionsViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Policedivisions.objects.all()
@@ -130,3 +132,5 @@ class ProvincialministrydemartmentsViewset(mixins.CreateModelMixin,mixins.ListMo
     
 
 
+=======
+>>>>>>> a44f7984ad282c2b8008e716b9c2af303f5781f2
