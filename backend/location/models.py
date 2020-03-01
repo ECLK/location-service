@@ -129,6 +129,41 @@ class Divisionalsecretariats(models.Model):
     created_time=models.DateTimeField(auto_now_add= True)
     updated_time=models.DateTimeField(auto_now= True)
 
+class Policedivisions(models.Model):
+    name_sinhala=models.CharField(max_length=200)
+    name_tamil=models.CharField(max_length=200)
+    name_english=models.CharField(max_length=200)
+    provice=models.ForeignKey(Provincialcouncils, on_delete=models.CASCADE)
+    status=models.BooleanField(default=True)
+    created_time=models.DateTimeField(auto_now_add= True)
+    updated_time=models.DateTimeField(auto_now= True)
+
+class Policestations(models.Model):
+    name_sinhala=models.CharField(max_length=200)
+    name_tamil=models.CharField(max_length=200)
+    name_english=models.CharField(max_length=200)
+    police_division=models.ForeignKey(Policedivisions, on_delete=models.CASCADE)
+    status=models.BooleanField(default=True)
+    created_time=models.DateTimeField(auto_now_add= True)
+    updated_time=models.DateTimeField(auto_now= True)
+
+class Provincialministries(models.Model):
+    name_sinhala=models.CharField(max_length=200)
+    name_tamil=models.CharField(max_length=200)
+    name_english=models.CharField(max_length=200)
+    province=models.ForeignKey(Provincialcouncils, on_delete=models.CASCADE)
+    status=models.BooleanField(default=True)
+    created_time=models.DateTimeField(auto_now_add= True)
+    updated_time=models.DateTimeField(auto_now= True)
+
+class Provincialministrydemartments(models.Model):
+    name_sinhala=models.CharField(max_length=200)
+    name_tamil=models.CharField(max_length=200)
+    name_english=models.CharField(max_length=200)
+    province_ministry=models.ForeignKey(Provincialministries, on_delete=models.CASCADE)
+    status=models.BooleanField(default=True)
+    created_time=models.DateTimeField(auto_now_add= True)
+    updated_time=models.DateTimeField(auto_now= True)
 
 
 
