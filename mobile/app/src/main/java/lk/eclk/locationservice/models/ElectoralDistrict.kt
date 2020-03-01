@@ -1,4 +1,4 @@
-package lk.eclk.locationservice.data.remote.responses.locationsresponse
+package lk.eclk.locationservice.models
 
 import com.google.gson.annotations.SerializedName
 

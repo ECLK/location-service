@@ -7,12 +7,11 @@ import lk.eclk.locationservice.R
 import lk.eclk.locationservice.data.remote.interceptors.AuthenticityInterceptor
 import lk.eclk.locationservice.data.remote.interceptors.ConnectivityInterceptor
 import lk.eclk.locationservice.data.remote.responses.TokenResponse
+import lk.eclk.locationservice.data.remote.responses.LocationResponse
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 import java.util.concurrent.TimeUnit
 
 interface LocationServiceApiService {
@@ -23,6 +22,11 @@ interface LocationServiceApiService {
         @Field("username") username: String,
         @Field("password") password: String
     ): Deferred<TokenResponse>
+
+    @GET("api/search?")
+    fun searchLocations(
+        @Query("search") text:String?
+    ):Deferred<LocationResponse>
 
     companion object {
         operator fun invoke(
