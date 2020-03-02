@@ -5,6 +5,7 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import kotlinx.coroutines.Deferred
 import lk.eclk.locationservice.R
 import lk.eclk.locationservice.data.remote.interceptors.AuthenticityInterceptor
+import lk.eclk.locationservice.data.remote.interceptors.AuthorizationInterceptor
 import lk.eclk.locationservice.data.remote.interceptors.ConnectivityInterceptor
 import lk.eclk.locationservice.data.remote.responses.TokenResponse
 import lk.eclk.locationservice.data.remote.responses.LocationResponse
@@ -25,13 +26,14 @@ interface LocationServiceApiService {
 
     @GET("api/search?")
     fun searchLocations(
-        @Query("search") text:String?
-    ):Deferred<LocationResponse>
+        @Query("search") text: String?
+    ): Deferred<LocationResponse>
 
     companion object {
         operator fun invoke(
             connectivityInterceptor: ConnectivityInterceptor,
             authenticityInterceptor: AuthenticityInterceptor,
+            authorizationInterceptor: AuthorizationInterceptor,
             context: Context
         ): LocationServiceApiService {
             val okHttpClient = OkHttpClient.Builder()
@@ -39,6 +41,7 @@ interface LocationServiceApiService {
                 .readTimeout(60, TimeUnit.SECONDS)
                 .addInterceptor(connectivityInterceptor)
                 .addInterceptor(authenticityInterceptor)
+                .addInterceptor(authorizationInterceptor)
                 .build()
 
             return Retrofit.Builder()

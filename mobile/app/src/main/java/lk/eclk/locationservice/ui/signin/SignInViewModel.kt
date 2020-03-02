@@ -1,6 +1,5 @@
 package lk.eclk.locationservice.ui.signin
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +8,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import lk.eclk.locationservice.R
 import lk.eclk.locationservice.data.repository.Repository
-import lk.eclk.locationservice.internal.AuthResponseState
+import lk.eclk.locationservice.internal.ResponseStates
 import lk.eclk.locationservice.internal.eventexecutor.LiveMessageEvent
 import lk.eclk.locationservice.internal.eventexecutor.MessageEvents
 
@@ -25,13 +24,13 @@ class SignInViewModel(private val repository: Repository) : ViewModel() {
         _signingIn.postValue(true)
         GlobalScope.launch(Dispatchers.IO) {
             when (repository.signIn(username, password)) {
-                AuthResponseState.AUTHENTICATED -> {
+                ResponseStates.AUTHENTICATED -> {
                     GlobalScope.launch(Dispatchers.Main) {
                         liveMessageEvent.sendEvent { showSnackBar("Authenticated successfully!") }
                         liveMessageEvent.sendEvent { navigate(R.id.action_signInFragment_to_homeFragment) }
                     }
                 }
-                AuthResponseState.UNAUTHENTICATED -> {
+                ResponseStates.UNAUTHENTICATED -> {
                     GlobalScope.launch(Dispatchers.Main) {
                         liveMessageEvent.sendEvent {
                             showSnackBar(
@@ -40,7 +39,7 @@ class SignInViewModel(private val repository: Repository) : ViewModel() {
                         }
                     }
                 }
-                AuthResponseState.NO_CONNCECTIVITY -> {
+                ResponseStates.NO_CONNECTIVITY -> {
                     GlobalScope.launch(Dispatchers.Main) {
                         liveMessageEvent.sendEvent {
                             showSnackBar(
@@ -49,7 +48,7 @@ class SignInViewModel(private val repository: Repository) : ViewModel() {
                         }
                     }
                 }
-                AuthResponseState.ERROR -> {
+                ResponseStates.ERROR -> {
                     GlobalScope.launch(Dispatchers.Main) {
                         liveMessageEvent.sendEvent {
                             showSnackBar(

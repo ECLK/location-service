@@ -5,9 +5,10 @@ enum class AuthState {
     NEED_LOGIN
 }
 
-enum class AuthResponseState {
+enum class ResponseStates {
     AUTHENTICATED,
     UNAUTHENTICATED,
-    NO_CONNCECTIVITY,
+    NO_CONNECTIVITY,
     ERROR,
+    OK,
 }
