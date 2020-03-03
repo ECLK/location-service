@@ -174,7 +174,7 @@ class Institutes(models.Model):
     name_tamil=models.CharField(max_length=200)
     name_english=models.CharField(max_length=200)
     institute_type=models.CharField(max_length=50)
-    mother_org=models.ForeignKey('self', null=True, related_name='employee', on_delete=models.CASCADE)
+    mother_org=models.ForeignKey('self', null=True, related_name='Institutes', on_delete=models.CASCADE)
     status=models.BooleanField(default=True)
     created_time=models.DateTimeField(auto_now_add= True)
     updated_time=models.DateTimeField(auto_now= True)

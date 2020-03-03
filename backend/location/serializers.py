@@ -108,8 +108,13 @@ class ProvincialministrydemartmentsSerializer(serializers.ModelSerializer):
         model=models.Provincialministrydemartments
         fields = ('id','name_sinhala','name_tamil','name_english','province_ministry','status')
 
+#class RecursiveField(serializers.Serializer):
+#    def to_representation(self, value):
+#       serializer = self.parent.parent.__class__(value, context=self.context)
+#       return serializer.data
 class InstitutesSerializer(serializers.ModelSerializer):
 
+#    mother_org = RecursiveField('mother_org', many=True)
     class Meta:
         model=models.Institutes
         fields = ('id','code','name_sinhala','name_tamil','name_english','institute_type','mother_org','status')
