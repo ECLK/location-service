@@ -1,6 +1,7 @@
 package lk.eclk.locationservice.data.repository
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -9,6 +10,7 @@ import lk.eclk.locationservice.data.proviers.JWTProvider
 import lk.eclk.locationservice.data.remote.datasources.LocationServiceApiNetworkDataSource
 import lk.eclk.locationservice.internal.ResponseStates
 import lk.eclk.locationservice.internal.AuthState
+import lk.eclk.locationservice.models.Location
 
 class RepositoryImpl(
     private val jwtProvider: JWTProvider,
@@ -23,6 +25,10 @@ class RepositoryImpl(
                     // eg: fetching user data or remove caches
                 }
             }
+        }
+
+        locationServiceApiNetworkDataSource.apply {
+            locationsResponse.observeForever { response -> print(response) }
         }
     }
 
@@ -39,4 +45,11 @@ class RepositoryImpl(
     }
 
     override fun signOut() = jwtProvider.deleteTokens()
+
+    override suspend fun searchLocations(query: String?): LiveData<List<Location>> {
+        return withContext(Dispatchers.IO) {
+            locationServiceApiNetworkDataSource.searchLocations(query)
+            return@withContext MutableLiveData<List<Location>>()
+        }
+    }
 }
