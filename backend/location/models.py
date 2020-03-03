@@ -8,6 +8,9 @@ class Provincialcouncils(models.Model):
     name_english=models.CharField(max_length=200)
     status=models.BooleanField(default=True)
 
+    class Meta:
+        ordering = ('id', )
+
 class Electroaldistrict(models.Model):
     name_sinhala=models.CharField(max_length=100)
     name_tamil=models.CharField(max_length=100)
@@ -16,6 +19,9 @@ class Electroaldistrict(models.Model):
     ed_status=models.BooleanField(default=True)
     created_time=models.DateTimeField(auto_now_add= True)
     updated_time=models.DateTimeField(auto_now= True)
+
+    class Meta:
+        ordering = ('id', )
     
 class Admindistrict(models.Model):
     name_sinhala=models.CharField(max_length=100)
@@ -35,6 +41,9 @@ class Polingdivision(models.Model):
     created_time=models.DateTimeField(auto_now_add= True)
     updated_time=models.DateTimeField(auto_now= True)
 
+    class Meta:
+        ordering = ('id', )
+
 class Gramaniladaridivision(models.Model):
     gnd_code=models.CharField(max_length=15, primary_key=True)
     name_sinhala=models.CharField(max_length=100)
@@ -44,6 +53,8 @@ class Gramaniladaridivision(models.Model):
     gdn_status=models.BooleanField(default=True)
     created_time=models.DateTimeField(auto_now_add= True)
     updated_time=models.DateTimeField(auto_now= True)
+    class Meta:
+        ordering = ('gnd_code', )
 
 class Locations(models.Model):
     code=models.CharField(max_length=15, primary_key=True)
@@ -59,6 +70,9 @@ class Locations(models.Model):
     created_time=models.DateTimeField(auto_now_add= True)
     updated_time=models.DateTimeField(auto_now= True)
 
+    class Meta:
+        ordering = ('code', )
+
 class Location_contacts(models.Model):
     contact_type=models.CharField(max_length=20)
     contact_details=models.CharField(max_length=200)
@@ -66,6 +80,9 @@ class Location_contacts(models.Model):
     lc_status=models.BooleanField(default=True)
     created_time=models.DateTimeField(auto_now_add= True)
     updated_time=models.DateTimeField(auto_now= True)
+    
+    class Meta:
+        ordering = ('id', )
 
 class Media_items(models.Model):
     title=models.CharField(max_length=150)
@@ -79,6 +96,9 @@ class Media_items(models.Model):
     created_time=models.DateTimeField(auto_now_add= True)
     updated_time=models.DateTimeField(auto_now= True)
 
+    class Meta:
+        ordering = ('id', )
+
 class Ministries(models.Model):
     name_sinhala=models.CharField(max_length=200)
     name_tamil=models.CharField(max_length=200)
@@ -86,6 +106,9 @@ class Ministries(models.Model):
     status=models.BooleanField(default=True)
     created_time=models.DateTimeField(auto_now_add= True)
     updated_time=models.DateTimeField(auto_now= True)
+
+    class Meta:
+        ordering = ('id', )
 
 class Commissions(models.Model):
     name_sinhala=models.CharField(max_length=200)
@@ -95,6 +118,9 @@ class Commissions(models.Model):
     created_time=models.DateTimeField(auto_now_add= True)
     updated_time=models.DateTimeField(auto_now= True)
 
+    class Meta:
+        ordering = ('id', )
+
 class LocalAuthorities(models.Model):
     name_sinhala=models.CharField(max_length=200)
     name_tamil=models.CharField(max_length=200)
@@ -103,6 +129,8 @@ class LocalAuthorities(models.Model):
     status=models.BooleanField(default=True)
     created_time=models.DateTimeField(auto_now_add= True)
     updated_time=models.DateTimeField(auto_now= True)
+    class Meta:
+        ordering = ('id', )
 class Departments(models.Model):
     name_sinhala=models.CharField(max_length=200)
     name_tamil=models.CharField(max_length=200)
@@ -111,6 +139,9 @@ class Departments(models.Model):
     status=models.BooleanField(default=True)
     created_time=models.DateTimeField(auto_now_add= True)
     updated_time=models.DateTimeField(auto_now= True)
+
+    class Meta:
+        ordering = ('id', )
 
 class Branches(models.Model):
     name_sinhala=models.CharField(max_length=200)
@@ -121,6 +152,9 @@ class Branches(models.Model):
     created_time=models.DateTimeField(auto_now_add= True)
     updated_time=models.DateTimeField(auto_now= True)
 
+    class Meta:
+        ordering = ('id', )
+
 class Divisionalsecretariats(models.Model):
     name_sinhala=models.CharField(max_length=200)
     name_tamil=models.CharField(max_length=200)
@@ -129,6 +163,9 @@ class Divisionalsecretariats(models.Model):
     status=models.BooleanField(default=True)
     created_time=models.DateTimeField(auto_now_add= True)
     updated_time=models.DateTimeField(auto_now= True)
+
+    class Meta:
+        ordering = ('id', )
 
 
 class Policedivisions(models.Model):
@@ -140,6 +177,9 @@ class Policedivisions(models.Model):
     created_time=models.DateTimeField(auto_now_add= True)
     updated_time=models.DateTimeField(auto_now= True)
 
+    class Meta:
+        ordering = ('id', )
+
 class Policestations(models.Model):
     name_sinhala=models.CharField(max_length=200)
     name_tamil=models.CharField(max_length=200)
@@ -148,6 +188,9 @@ class Policestations(models.Model):
     status=models.BooleanField(default=True)
     created_time=models.DateTimeField(auto_now_add= True)
     updated_time=models.DateTimeField(auto_now= True)
+
+    class Meta:
+        ordering = ('id', )
 
 class Provincialministries(models.Model):
     name_sinhala=models.CharField(max_length=200)
@@ -158,6 +201,9 @@ class Provincialministries(models.Model):
     created_time=models.DateTimeField(auto_now_add= True)
     updated_time=models.DateTimeField(auto_now= True)
 
+    class Meta:
+        ordering = ('id', )
+
 class Provincialministrydemartments(models.Model):
     name_sinhala=models.CharField(max_length=200)
     name_tamil=models.CharField(max_length=200)
@@ -166,6 +212,8 @@ class Provincialministrydemartments(models.Model):
     status=models.BooleanField(default=True)
     created_time=models.DateTimeField(auto_now_add= True)
     updated_time=models.DateTimeField(auto_now= True)
+    class Meta:
+        ordering = ('id', )
 
 #for EDR Drop down
 class Institutes(models.Model):
@@ -178,4 +226,6 @@ class Institutes(models.Model):
     status=models.BooleanField(default=True)
     created_time=models.DateTimeField(auto_now_add= True)
     updated_time=models.DateTimeField(auto_now= True)
+    class Meta:
+        ordering = ('id', )
 
