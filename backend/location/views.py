@@ -138,7 +138,6 @@ class InstituteViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.Upda
     permission_classes = (IsAuthenticated,)
     queryset = Institutes.objects.all()
     serializer_class = InstitutesSerializer
-    pagination_class = PageNumberPagination
     ordering_fields = ['id']
 
 
