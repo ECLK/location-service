@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import LocationViewset, GramaniladariViewset, PolingdivisionViewset, ElectoraldistrictViewset,AdmindistrictViewset,MideaItemViewset,SearchLocation,MinistriesViewset, CommissionsViewset, LocalAuthoritiesViewset, DepartmentsViewset, BranchesViewset, DivisionalsecretariatsViewset, ProvincialcouncilsViewset, PolicedivisionsViewset, ProvincialministriesViewset, ProvincialministrydemartmentsViewset
+from .views import LocationViewset, GramaniladariViewset, PolingdivisionViewset, ElectoraldistrictViewset,AdmindistrictViewset,MideaItemViewset,SearchLocation,MinistriesViewset, CommissionsViewset, LocalAuthoritiesViewset, DepartmentsViewset, BranchesViewset, DivisionalsecretariatsViewset, ProvincialcouncilsViewset, PolicedivisionsViewset, ProvincialministriesViewset, ProvincialministrydemartmentsViewset, InstituteViewset
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
@@ -20,5 +20,7 @@ router.register('divisionalsecretariats', DivisionalsecretariatsViewset)
 router.register('policedivisions', PolicedivisionsViewset)
 router.register('provincialministries', ProvincialministriesViewset)
 router.register('provicialdepartments', ProvincialministrydemartmentsViewset)
+router.register('institutes', InstituteViewset)
+
 
 urlpatterns = router.urls
