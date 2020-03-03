@@ -12,7 +12,6 @@ class Electroaldistrict(models.Model):
     name_sinhala=models.CharField(max_length=100)
     name_tamil=models.CharField(max_length=100)
     name_english=models.CharField(max_length=100)
-
     provice=models.ForeignKey(Provincialcouncils, on_delete=models.CASCADE)
     ed_status=models.BooleanField(default=True)
     created_time=models.DateTimeField(auto_now_add= True)
@@ -130,7 +129,7 @@ class Divisionalsecretariats(models.Model):
     status=models.BooleanField(default=True)
     created_time=models.DateTimeField(auto_now_add= True)
     updated_time=models.DateTimeField(auto_now= True)
-<<<<<<< HEAD
+
 
 class Policedivisions(models.Model):
     name_sinhala=models.CharField(max_length=200)
@@ -168,9 +167,15 @@ class Provincialministrydemartments(models.Model):
     created_time=models.DateTimeField(auto_now_add= True)
     updated_time=models.DateTimeField(auto_now= True)
 
+#for EDR Drop down
+class Institutes(models.Model):
+    code=models.CharField(max_length=50)
+    name_sinhala=models.CharField(max_length=200)
+    name_tamil=models.CharField(max_length=200)
+    name_english=models.CharField(max_length=200)
+    institute_type=models.CharField(max_length=50)
+    mother_org=models.ForeignKey('self', null=True, related_name='employee', on_delete=models.CASCADE)
+    status=models.BooleanField(default=True)
+    created_time=models.DateTimeField(auto_now_add= True)
+    updated_time=models.DateTimeField(auto_now= True)
 
-
-
-
-=======
->>>>>>> a44f7984ad282c2b8008e716b9c2af303f5781f2
