@@ -13,13 +13,11 @@ from rest_framework.response import Response
 class AdmindistrictViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
     queryset = Admindistrict.objects.all()
     serializer_class = AdmindistrictSerializer
-    pagination_class = PageNumberPagination
     permission_classes = (IsAuthenticated,)
     ordering_fields = ['id']
 class ElectoraldistrictViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
     queryset = Electroaldistrict.objects.all()
     serializer_class = ElectroaldistrictSerializer
-    pagination_class = PageNumberPagination
     permission_classes = (IsAuthenticated,)
     ordering_fields = ['id']
 
@@ -27,82 +25,74 @@ class PolingdivisionViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins
     permission_classes = [IsAuthenticated,]
     queryset = Polingdivision.objects.all()
     serializer_class = PolingdivisionSerializer
-    pagination_class = PageNumberPagination
     ordering_fields = ['id']
-    
-class LocationViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):   
+
+class LocationViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
     queryset = Locations.objects.all()
     serializer_class = LocationsSerializer
-    permission_classes = (IsAuthenticated,)
-    pagination_class = PageNumberPagination
+    # permission_classes = (IsAuthenticated,)
     ordering_fields = ['code']
+
 class GramaniladariViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Gramaniladaridivision.objects.all()
     serializer_class = GramaniladaridivisionSerializer
-    pagination_class = PageNumberPagination 
     ordering_fields = ['gnd_code']
+
 class MideaItemViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Media_items.objects.all()
     parser_class = (FileUploadParser,)
     serializer_class = Media_itemsSerializer
-    pagination_class = PageNumberPagination
     ordering_fields = ['id']
+
 class SearchLocation(mixins.ListModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Locations.objects.all()
     serializer_class = LocationsSerializer
     filter_backends = [SearchFilter]
     search_fields = ['code', 'name_sinhala','name_tamil','name_english','gdn__gnd_code', 'gdn__name_english','gdn__name_sinhala','gdn__name_tamil','gdn__polingdivision__name_english','gdn__polingdivision__name_tamil','gdn__polingdivision__name_sinhala','gdn__polingdivision__id','gdn__polingdivision__electoral_district__name_sinhala','gdn__polingdivision__electoral_district__name_english','gdn__polingdivision__electoral_district__name_tamil','gdn__polingdivision__electoral_district__id']
-    pagination_class = PageNumberPagination
     ordering_fields = ['code']
+
 class MinistriesViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Ministries.objects.all()
     serializer_class = MinistriesSerializer
-    pagination_class = PageNumberPagination
     ordering_fields = ['id']
 
 class CommissionsViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Commissions.objects.all()
     serializer_class = CommissionsSerializer
-    pagination_class = PageNumberPagination
     ordering_fields = ['id']
 
 class LocalAuthoritiesViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = LocalAuthorities.objects.all()
     serializer_class = LocalAuthoritiesSerializer
-    pagination_class = PageNumberPagination
     ordering_fields = ['id']
 
 class DepartmentsViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Departments.objects.all()
     serializer_class = DepartmentsSerializer
-    pagination_class = PageNumberPagination
     ordering_fields = ['id']
 
 class BranchesViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Branches.objects.all()
     serializer_class = BranchesSerializer
-    pagination_class = PageNumberPagination
 
 class DivisionalsecretariatsViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Divisionalsecretariats.objects.all()
     serializer_class = DivisionalsecretariatsSerializer
-    pagination_class = PageNumberPagination
     ordering_fields = ['id']
 
 class ProvincialcouncilsViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Provincialcouncils.objects.all()
     serializer_class = ProvincialcouncilsSerializer
-    pagination_class = PageNumberPagination
     ordering_fields = ['id']
 
 
@@ -110,28 +100,24 @@ class PolicedivisionsViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixin
     permission_classes = (IsAuthenticated,)
     queryset = Policedivisions.objects.all()
     serializer_class = PolicedivisionsSerializer
-    pagination_class = PageNumberPagination
     ordering_fields = ['id']
 
 class PolicestationsViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Policestations.objects.all()
     serializer_class = PolicestationsSerializer
-    pagination_class = PageNumberPagination
     ordering_fields = ['id']
 
 class ProvincialministriesViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Provincialministries.objects.all()
     serializer_class = ProvincialministriesSerializer
-    pagination_class = PageNumberPagination
     ordering_fields = ['id']
 
 class ProvincialministrydemartmentsViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Provincialministrydemartments.objects.all()
     serializer_class = ProvincialministrydemartmentsSerializer
-    pagination_class = PageNumberPagination
     ordering_fields = ['id']
 
 class InstituteViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.UpdateModelMixin,mixins.RetrieveModelMixin,viewsets.GenericViewSet):
@@ -139,15 +125,3 @@ class InstituteViewset(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.Upda
     queryset = Institutes.objects.all()
     serializer_class = InstitutesSerializer
     ordering_fields = ['id']
-
-
-
-
-
-
-
-    
-    
-    
-
-    
