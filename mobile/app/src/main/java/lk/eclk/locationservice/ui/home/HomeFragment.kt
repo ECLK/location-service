@@ -37,7 +37,7 @@ class HomeFragment : Fragment(), KodeinAware {
     }
 
     private fun bindUI() {
+        viewModel.searchLocations("")
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
     }
-
 }

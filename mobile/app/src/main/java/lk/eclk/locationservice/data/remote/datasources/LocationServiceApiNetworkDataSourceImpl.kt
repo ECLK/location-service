@@ -3,6 +3,8 @@ package lk.eclk.locationservice.data.remote.datasources
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import lk.eclk.locationservice.data.remote.api.LocationServiceApiService
 import lk.eclk.locationservice.data.remote.responses.LocationResponse
 import lk.eclk.locationservice.data.remote.responses.TokenResponse

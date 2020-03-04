@@ -1,5 +1,6 @@
 package lk.eclk.locationservice.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.Dispatchers
@@ -28,7 +29,10 @@ class RepositoryImpl(
         }
 
         locationServiceApiNetworkDataSource.apply {
-            locationsResponse.observeForever { response -> print(response) }
+            locationsResponse.observeForever { response ->
+                if(response == null) return@observeForever
+                GlobalScope.launch(Dispatchers.IO) { Log.e("response",response.toString()) }
+            }
         }
     }
 

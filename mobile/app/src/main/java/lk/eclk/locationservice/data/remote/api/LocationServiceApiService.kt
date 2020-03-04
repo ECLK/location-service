@@ -24,7 +24,7 @@ interface LocationServiceApiService {
         @Field("password") password: String
     ): Deferred<TokenResponse>
 
-    @GET("api/search?")
+    @GET("api/search/")
     fun searchLocations(
         @Query("search") text: String?
     ): Deferred<LocationResponse>

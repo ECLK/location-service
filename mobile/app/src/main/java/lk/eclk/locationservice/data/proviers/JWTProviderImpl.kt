@@ -1,13 +1,14 @@
 package lk.eclk.locationservice.data.proviers
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import lk.eclk.locationservice.data.remote.responses.TokenResponse
 import lk.eclk.locationservice.internal.AuthState
 
 private const val ACCESS_TOKEN = "access_token"
-private const val REFRESH_TOKEN = "access_token"
+private const val REFRESH_TOKEN = "refresh_token"
 
 class JWTProviderImpl(context: Context) : PreferenceProvider(context), JWTProvider {
 
