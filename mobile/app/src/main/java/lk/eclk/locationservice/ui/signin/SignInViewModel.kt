@@ -1,8 +1,10 @@
 package lk.eclk.locationservice.ui.signin
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.work.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -11,8 +13,11 @@ import lk.eclk.locationservice.data.repository.Repository
 import lk.eclk.locationservice.internal.ResponseStates
 import lk.eclk.locationservice.internal.eventexecutor.LiveMessageEvent
 import lk.eclk.locationservice.internal.eventexecutor.MessageEvents
+import lk.eclk.locationservice.workers.RefreshTokenWorker
+import java.util.concurrent.TimeUnit
 
-class SignInViewModel(private val repository: Repository) : ViewModel() {
+class SignInViewModel(private val repository: Repository, private val context: Context) :
+    ViewModel() {
 
     val signingIn: LiveData<Boolean> get() = _signingIn
     private val _signingIn = MutableLiveData<Boolean>(false)
@@ -26,6 +31,7 @@ class SignInViewModel(private val repository: Repository) : ViewModel() {
             when (repository.signIn(username, password)) {
                 ResponseStates.AUTHENTICATED -> {
                     GlobalScope.launch(Dispatchers.Main) {
+                        startPeriodicRefreshTokenTask()
                         liveMessageEvent.sendEvent { showSnackBar("Authenticated successfully!") }
                         liveMessageEvent.sendEvent { navigate(R.id.action_signInFragment_to_homeFragment) }
                     }
@@ -60,5 +66,26 @@ class SignInViewModel(private val repository: Repository) : ViewModel() {
             }
         }
         _signingIn.postValue(false)
+    }
+
+    private fun startPeriodicRefreshTokenTask() {
+        val uniqueWorkName = "location-service-app-392:refresh-token-work"
+
+        val workConstraints = Constraints
+            .Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+
+        val periodicRefreshTokenWork =
+            PeriodicWorkRequestBuilder<RefreshTokenWorker>(4, TimeUnit.MINUTES)
+                .setConstraints(workConstraints)
+                .build()
+
+        WorkManager.getInstance(context!!)
+            .enqueueUniquePeriodicWork(
+                uniqueWorkName,
+                ExistingPeriodicWorkPolicy.REPLACE,
+                periodicRefreshTokenWork
+            )
     }
 }

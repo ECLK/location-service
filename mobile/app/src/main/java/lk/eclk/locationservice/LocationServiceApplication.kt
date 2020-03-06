@@ -61,7 +61,7 @@ class LocationServiceApplication : Application(), KodeinAware {
 
         //view model factories
         bind() from provider { SplashScreenViewModelFactory(instance()) }
-        bind() from provider { SignInViewModelFactory(instance()) }
+        bind() from provider { SignInViewModelFactory(instance(),instance()) }
         bind() from provider { HomeViewModelFactory(instance()) }
     }
 }

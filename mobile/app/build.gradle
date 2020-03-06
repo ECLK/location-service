@@ -89,4 +89,8 @@ dependencies {
 
     // android permission check
     implementation 'com.karumi:dexter:6.0.0'
+
+    //worker manager
+    def work_version = "2.3.3"
+    implementation "androidx.work:work-runtime-ktx:$work_version"
 }

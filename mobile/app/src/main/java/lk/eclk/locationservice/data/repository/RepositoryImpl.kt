@@ -27,13 +27,6 @@ class RepositoryImpl(
                 }
             }
         }
-
-        locationServiceApiNetworkDataSource.apply {
-            locationsResponse.observeForever { response ->
-                if(response == null) return@observeForever
-                GlobalScope.launch(Dispatchers.IO) { Log.e("response",response.toString()) }
-            }
-        }
     }
 
     override fun getAuthState(): LiveData<AuthState> = jwtProvider.authState
@@ -49,11 +42,19 @@ class RepositoryImpl(
     }
 
     override fun signOut() = jwtProvider.deleteTokens()
-
-    override suspend fun searchLocations(query: String?): LiveData<List<Location>> {
+    override suspend fun refreshAccessToken(): ResponseStates {
         return withContext(Dispatchers.IO) {
-            locationServiceApiNetworkDataSource.searchLocations(query)
-            return@withContext MutableLiveData<List<Location>>()
+            var pair = locationServiceApiNetworkDataSource.refreshAccessToken(jwtProvider.getRefreshToken())
+            if (pair.first != null) {
+                jwtProvider.setAccessToken(pair.first!!)
+            }
+            return@withContext pair.second
+        }
+    }
+
+    override suspend fun searchLocations(query: String?): List<Location>? {
+        return withContext(Dispatchers.IO) {
+         return@withContext locationServiceApiNetworkDataSource.searchLocations(query)?.results
         }
     }
 }

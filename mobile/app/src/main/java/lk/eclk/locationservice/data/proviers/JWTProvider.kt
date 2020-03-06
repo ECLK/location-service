@@ -9,5 +9,6 @@ interface JWTProvider {
     fun getAccessToken(): String?
     fun getRefreshToken(): String?
     fun setTokens(tokenResponse: TokenResponse): Boolean
+    fun setAccessToken(tokenResponse: TokenResponse): Boolean
     fun deleteTokens(): Boolean
 }

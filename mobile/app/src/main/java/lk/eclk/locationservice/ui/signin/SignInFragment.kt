@@ -42,7 +42,7 @@ class SignInFragment : Fragment(), KodeinAware, MessageEvents {
 
     private fun bindUI() {
         viewModel.liveMessageEvent.setEventReceiver(this, this)
-        viewModel.signingIn.observe(this, Observer { state ->
+        viewModel.signingIn.observe(viewLifecycleOwner, Observer { state ->
             progress_horizontal.visibility = if (state) View.VISIBLE else View.INVISIBLE
             btn_login.isEnabled = !state
         })

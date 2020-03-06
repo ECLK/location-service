@@ -24,6 +24,12 @@ interface LocationServiceApiService {
         @Field("password") password: String
     ): Deferred<TokenResponse>
 
+    @FormUrlEncoded
+    @POST("api/token/refresh/")
+    fun refreshToken(
+        @Field("refresh") token: String?
+    ): Deferred<TokenResponse>
+
     @GET("api/search/")
     fun searchLocations(
         @Query("search") text: String?

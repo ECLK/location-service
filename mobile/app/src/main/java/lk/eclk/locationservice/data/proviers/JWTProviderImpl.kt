@@ -36,6 +36,13 @@ class JWTProviderImpl(context: Context) : PreferenceProvider(context), JWTProvid
             .commit()
     }
 
+    override fun setAccessToken(tokenResponse: TokenResponse): Boolean {
+        setAuthState(tokenResponse.accessToken)
+        return preference.edit()
+            .putString(ACCESS_TOKEN, tokenResponse.accessToken)
+            .commit()
+    }
+
     override fun deleteTokens(): Boolean {
         setAuthState(null)
         return preference.edit()
