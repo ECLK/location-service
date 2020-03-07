@@ -81,3 +81,41 @@ class ProvincialcouncilsSerializer(serializers.ModelSerializer):
     class Meta:
         model=models.Provincialcouncils
         fields = ('id','name_sinhala','name_tamil','name_english','status')
+
+
+class PolicedivisionsSerializer(serializers.ModelSerializer):
+    provice=ProvincialcouncilsSerializer(many=False)
+    class Meta:
+        model=models.Policedivisions
+        fields = ('id','name_sinhala','name_tamil','name_english','provice','status')
+
+class PolicestationsSerializer(serializers.ModelSerializer):
+    police_division=PolicedivisionsSerializer(many=False)
+    class Meta:
+        model=models.Policestations
+        fields = ('id','name_sinhala','name_tamil','name_english','police_division','status')
+
+
+class ProvincialministriesSerializer(serializers.ModelSerializer):
+    province=ProvincialcouncilsSerializer(many=False)
+    class Meta:
+        model=models.Provincialministries
+        fields = ('id','name_sinhala','name_tamil','name_english','province','status')
+
+class ProvincialministrydemartmentsSerializer(serializers.ModelSerializer):
+    province=ProvincialministriesSerializer(many=False)
+    class Meta:
+        model=models.Provincialministrydemartments
+        fields = ('id','name_sinhala','name_tamil','name_english','province_ministry','status')
+
+#class RecursiveField(serializers.Serializer):
+#    def to_representation(self, value):
+#       serializer = self.parent.parent.__class__(value, context=self.context)
+#       return serializer.data
+class InstitutesSerializer(serializers.ModelSerializer):
+
+#    mother_org = RecursiveField('mother_org', many=True)
+    class Meta:
+        model=models.Institutes
+        fields = ('id','code','name_sinhala','name_tamil','name_english','institute_type','mother_org','status')
+

@@ -1,0 +1,3171 @@
+openapi: 3.0.2
+info:
+  title: ''
+  version: ''
+paths:
+  /api/locations/:
+    get:
+      operationId: listLocations
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        code:
+                          type: string
+                          maxLength: 15
+                        name_sinhala:
+                          type: string
+                          maxLength: 250
+                        name_tamil:
+                          type: string
+                          maxLength: 250
+                        name_english:
+                          type: string
+                          maxLength: 250
+                        coordinate_east:
+                          type: number
+                        coordinate_north:
+                          type: number
+                        latitude:
+                          type: number
+                        longitute:
+                          type: number
+                        gdn:
+                          properties:
+                            gnd_code:
+                              type: string
+                              maxLength: 15
+                            name_sinhala:
+                              type: string
+                              maxLength: 100
+                            name_tamil:
+                              type: string
+                              maxLength: 100
+                            name_english:
+                              type: string
+                              maxLength: 100
+                            polingdivision:
+                              properties:
+                                id:
+                                  type: integer
+                                  readOnly: true
+                                name_sinhala:
+                                  type: string
+                                  maxLength: 100
+                                name_tamil:
+                                  type: string
+                                  maxLength: 100
+                                name_english:
+                                  type: string
+                                  maxLength: 100
+                                pd_status:
+                                  type: boolean
+                                electoral_district:
+                                  properties:
+                                    id:
+                                      type: integer
+                                      readOnly: true
+                                    name_sinhala:
+                                      type: string
+                                      maxLength: 100
+                                    name_tamil:
+                                      type: string
+                                      maxLength: 100
+                                    name_english:
+                                      type: string
+                                      maxLength: 100
+                                    ed_status:
+                                      type: boolean
+                                  required:
+                                  - name_sinhala
+                                  - name_tamil
+                                  - name_english
+                                  type: object
+                              required:
+                              - name_sinhala
+                              - name_tamil
+                              - name_english
+                              - electoral_district
+                              type: object
+                            gdn_status:
+                              type: boolean
+                          required:
+                          - gnd_code
+                          - name_sinhala
+                          - name_tamil
+                          - name_english
+                          - polingdivision
+                          type: object
+                        location_status:
+                          type: boolean
+                      required:
+                      - code
+                      - name_sinhala
+                      - name_tamil
+                      - name_english
+                      - coordinate_east
+                      - coordinate_north
+                      - latitude
+                      - longitute
+                      - gdn
+          description: ''
+    post:
+      operationId: createLocations
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id001
+              properties:
+                code:
+                  type: string
+                  maxLength: 15
+                name_sinhala:
+                  type: string
+                  maxLength: 250
+                name_tamil:
+                  type: string
+                  maxLength: 250
+                name_english:
+                  type: string
+                  maxLength: 250
+                coordinate_east:
+                  type: number
+                coordinate_north:
+                  type: number
+                latitude:
+                  type: number
+                longitute:
+                  type: number
+                gdn:
+                  properties:
+                    gnd_code:
+                      type: string
+                      maxLength: 15
+                    name_sinhala:
+                      type: string
+                      maxLength: 100
+                    name_tamil:
+                      type: string
+                      maxLength: 100
+                    name_english:
+                      type: string
+                      maxLength: 100
+                    polingdivision:
+                      properties:
+                        id:
+                          type: integer
+                          readOnly: true
+                        name_sinhala:
+                          type: string
+                          maxLength: 100
+                        name_tamil:
+                          type: string
+                          maxLength: 100
+                        name_english:
+                          type: string
+                          maxLength: 100
+                        pd_status:
+                          type: boolean
+                        electoral_district:
+                          properties:
+                            id:
+                              type: integer
+                              readOnly: true
+                            name_sinhala:
+                              type: string
+                              maxLength: 100
+                            name_tamil:
+                              type: string
+                              maxLength: 100
+                            name_english:
+                              type: string
+                              maxLength: 100
+                            ed_status:
+                              type: boolean
+                          required:
+                          - name_sinhala
+                          - name_tamil
+                          - name_english
+                          type: object
+                      required:
+                      - name_sinhala
+                      - name_tamil
+                      - name_english
+                      - electoral_district
+                      type: object
+                    gdn_status:
+                      type: boolean
+                  required:
+                  - gnd_code
+                  - name_sinhala
+                  - name_tamil
+                  - name_english
+                  - polingdivision
+                  type: object
+                location_status:
+                  type: boolean
+              required:
+              - code
+              - name_sinhala
+              - name_tamil
+              - name_english
+              - coordinate_east
+              - coordinate_north
+              - latitude
+              - longitute
+              - gdn
+          application/x-www-form-urlencoded:
+            schema: *id001
+          multipart/form-data:
+            schema: *id001
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    type: string
+                    maxLength: 15
+                  name_sinhala:
+                    type: string
+                    maxLength: 250
+                  name_tamil:
+                    type: string
+                    maxLength: 250
+                  name_english:
+                    type: string
+                    maxLength: 250
+                  coordinate_east:
+                    type: number
+                  coordinate_north:
+                    type: number
+                  latitude:
+                    type: number
+                  longitute:
+                    type: number
+                  gdn:
+                    properties:
+                      gnd_code:
+                        type: string
+                        maxLength: 15
+                      name_sinhala:
+                        type: string
+                        maxLength: 100
+                      name_tamil:
+                        type: string
+                        maxLength: 100
+                      name_english:
+                        type: string
+                        maxLength: 100
+                      polingdivision:
+                        properties:
+                          id:
+                            type: integer
+                            readOnly: true
+                          name_sinhala:
+                            type: string
+                            maxLength: 100
+                          name_tamil:
+                            type: string
+                            maxLength: 100
+                          name_english:
+                            type: string
+                            maxLength: 100
+                          pd_status:
+                            type: boolean
+                          electoral_district:
+                            properties:
+                              id:
+                                type: integer
+                                readOnly: true
+                              name_sinhala:
+                                type: string
+                                maxLength: 100
+                              name_tamil:
+                                type: string
+                                maxLength: 100
+                              name_english:
+                                type: string
+                                maxLength: 100
+                              ed_status:
+                                type: boolean
+                            required:
+                            - name_sinhala
+                            - name_tamil
+                            - name_english
+                            type: object
+                        required:
+                        - name_sinhala
+                        - name_tamil
+                        - name_english
+                        - electoral_district
+                        type: object
+                      gdn_status:
+                        type: boolean
+                    required:
+                    - gnd_code
+                    - name_sinhala
+                    - name_tamil
+                    - name_english
+                    - polingdivision
+                    type: object
+                  location_status:
+                    type: boolean
+                required:
+                - code
+                - name_sinhala
+                - name_tamil
+                - name_english
+                - coordinate_east
+                - coordinate_north
+                - latitude
+                - longitute
+                - gdn
+          description: ''
+  /api/locations/{code}/:
+    get:
+      operationId: retrieveLocations
+      description: ''
+      parameters:
+      - name: code
+        in: path
+        required: true
+        description: A unique value identifying this locations.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    type: string
+                    maxLength: 15
+                  name_sinhala:
+                    type: string
+                    maxLength: 250
+                  name_tamil:
+                    type: string
+                    maxLength: 250
+                  name_english:
+                    type: string
+                    maxLength: 250
+                  coordinate_east:
+                    type: number
+                  coordinate_north:
+                    type: number
+                  latitude:
+                    type: number
+                  longitute:
+                    type: number
+                  gdn:
+                    properties:
+                      gnd_code:
+                        type: string
+                        maxLength: 15
+                      name_sinhala:
+                        type: string
+                        maxLength: 100
+                      name_tamil:
+                        type: string
+                        maxLength: 100
+                      name_english:
+                        type: string
+                        maxLength: 100
+                      polingdivision:
+                        properties:
+                          id:
+                            type: integer
+                            readOnly: true
+                          name_sinhala:
+                            type: string
+                            maxLength: 100
+                          name_tamil:
+                            type: string
+                            maxLength: 100
+                          name_english:
+                            type: string
+                            maxLength: 100
+                          pd_status:
+                            type: boolean
+                          electoral_district:
+                            properties:
+                              id:
+                                type: integer
+                                readOnly: true
+                              name_sinhala:
+                                type: string
+                                maxLength: 100
+                              name_tamil:
+                                type: string
+                                maxLength: 100
+                              name_english:
+                                type: string
+                                maxLength: 100
+                              ed_status:
+                                type: boolean
+                            required:
+                            - name_sinhala
+                            - name_tamil
+                            - name_english
+                            type: object
+                        required:
+                        - name_sinhala
+                        - name_tamil
+                        - name_english
+                        - electoral_district
+                        type: object
+                      gdn_status:
+                        type: boolean
+                    required:
+                    - gnd_code
+                    - name_sinhala
+                    - name_tamil
+                    - name_english
+                    - polingdivision
+                    type: object
+                  location_status:
+                    type: boolean
+                required:
+                - code
+                - name_sinhala
+                - name_tamil
+                - name_english
+                - coordinate_east
+                - coordinate_north
+                - latitude
+                - longitute
+                - gdn
+          description: ''
+    put:
+      operationId: updateLocations
+      description: ''
+      parameters:
+      - name: code
+        in: path
+        required: true
+        description: A unique value identifying this locations.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id002
+              properties:
+                code:
+                  type: string
+                  maxLength: 15
+                name_sinhala:
+                  type: string
+                  maxLength: 250
+                name_tamil:
+                  type: string
+                  maxLength: 250
+                name_english:
+                  type: string
+                  maxLength: 250
+                coordinate_east:
+                  type: number
+                coordinate_north:
+                  type: number
+                latitude:
+                  type: number
+                longitute:
+                  type: number
+                gdn:
+                  properties:
+                    gnd_code:
+                      type: string
+                      maxLength: 15
+                    name_sinhala:
+                      type: string
+                      maxLength: 100
+                    name_tamil:
+                      type: string
+                      maxLength: 100
+                    name_english:
+                      type: string
+                      maxLength: 100
+                    polingdivision:
+                      properties:
+                        id:
+                          type: integer
+                          readOnly: true
+                        name_sinhala:
+                          type: string
+                          maxLength: 100
+                        name_tamil:
+                          type: string
+                          maxLength: 100
+                        name_english:
+                          type: string
+                          maxLength: 100
+                        pd_status:
+                          type: boolean
+                        electoral_district:
+                          properties:
+                            id:
+                              type: integer
+                              readOnly: true
+                            name_sinhala:
+                              type: string
+                              maxLength: 100
+                            name_tamil:
+                              type: string
+                              maxLength: 100
+                            name_english:
+                              type: string
+                              maxLength: 100
+                            ed_status:
+                              type: boolean
+                          required:
+                          - name_sinhala
+                          - name_tamil
+                          - name_english
+                          type: object
+                      required:
+                      - name_sinhala
+                      - name_tamil
+                      - name_english
+                      - electoral_district
+                      type: object
+                    gdn_status:
+                      type: boolean
+                  required:
+                  - gnd_code
+                  - name_sinhala
+                  - name_tamil
+                  - name_english
+                  - polingdivision
+                  type: object
+                location_status:
+                  type: boolean
+              required:
+              - code
+              - name_sinhala
+              - name_tamil
+              - name_english
+              - coordinate_east
+              - coordinate_north
+              - latitude
+              - longitute
+              - gdn
+          application/x-www-form-urlencoded:
+            schema: *id002
+          multipart/form-data:
+            schema: *id002
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    type: string
+                    maxLength: 15
+                  name_sinhala:
+                    type: string
+                    maxLength: 250
+                  name_tamil:
+                    type: string
+                    maxLength: 250
+                  name_english:
+                    type: string
+                    maxLength: 250
+                  coordinate_east:
+                    type: number
+                  coordinate_north:
+                    type: number
+                  latitude:
+                    type: number
+                  longitute:
+                    type: number
+                  gdn:
+                    properties:
+                      gnd_code:
+                        type: string
+                        maxLength: 15
+                      name_sinhala:
+                        type: string
+                        maxLength: 100
+                      name_tamil:
+                        type: string
+                        maxLength: 100
+                      name_english:
+                        type: string
+                        maxLength: 100
+                      polingdivision:
+                        properties:
+                          id:
+                            type: integer
+                            readOnly: true
+                          name_sinhala:
+                            type: string
+                            maxLength: 100
+                          name_tamil:
+                            type: string
+                            maxLength: 100
+                          name_english:
+                            type: string
+                            maxLength: 100
+                          pd_status:
+                            type: boolean
+                          electoral_district:
+                            properties:
+                              id:
+                                type: integer
+                                readOnly: true
+                              name_sinhala:
+                                type: string
+                                maxLength: 100
+                              name_tamil:
+                                type: string
+                                maxLength: 100
+                              name_english:
+                                type: string
+                                maxLength: 100
+                              ed_status:
+                                type: boolean
+                            required:
+                            - name_sinhala
+                            - name_tamil
+                            - name_english
+                            type: object
+                        required:
+                        - name_sinhala
+                        - name_tamil
+                        - name_english
+                        - electoral_district
+                        type: object
+                      gdn_status:
+                        type: boolean
+                    required:
+                    - gnd_code
+                    - name_sinhala
+                    - name_tamil
+                    - name_english
+                    - polingdivision
+                    type: object
+                  location_status:
+                    type: boolean
+                required:
+                - code
+                - name_sinhala
+                - name_tamil
+                - name_english
+                - coordinate_east
+                - coordinate_north
+                - latitude
+                - longitute
+                - gdn
+          description: ''
+    patch:
+      operationId: partial_updateLocations
+      description: ''
+      parameters:
+      - name: code
+        in: path
+        required: true
+        description: A unique value identifying this locations.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id003
+              properties:
+                code:
+                  type: string
+                  maxLength: 15
+                name_sinhala:
+                  type: string
+                  maxLength: 250
+                name_tamil:
+                  type: string
+                  maxLength: 250
+                name_english:
+                  type: string
+                  maxLength: 250
+                coordinate_east:
+                  type: number
+                coordinate_north:
+                  type: number
+                latitude:
+                  type: number
+                longitute:
+                  type: number
+                gdn:
+                  properties:
+                    gnd_code:
+                      type: string
+                      maxLength: 15
+                    name_sinhala:
+                      type: string
+                      maxLength: 100
+                    name_tamil:
+                      type: string
+                      maxLength: 100
+                    name_english:
+                      type: string
+                      maxLength: 100
+                    polingdivision:
+                      properties:
+                        id:
+                          type: integer
+                          readOnly: true
+                        name_sinhala:
+                          type: string
+                          maxLength: 100
+                        name_tamil:
+                          type: string
+                          maxLength: 100
+                        name_english:
+                          type: string
+                          maxLength: 100
+                        pd_status:
+                          type: boolean
+                        electoral_district:
+                          properties:
+                            id:
+                              type: integer
+                              readOnly: true
+                            name_sinhala:
+                              type: string
+                              maxLength: 100
+                            name_tamil:
+                              type: string
+                              maxLength: 100
+                            name_english:
+                              type: string
+                              maxLength: 100
+                            ed_status:
+                              type: boolean
+                          required:
+                          - name_sinhala
+                          - name_tamil
+                          - name_english
+                          type: object
+                      required:
+                      - name_sinhala
+                      - name_tamil
+                      - name_english
+                      - electoral_district
+                      type: object
+                    gdn_status:
+                      type: boolean
+                  required:
+                  - gnd_code
+                  - name_sinhala
+                  - name_tamil
+                  - name_english
+                  - polingdivision
+                  type: object
+                location_status:
+                  type: boolean
+          application/x-www-form-urlencoded:
+            schema: *id003
+          multipart/form-data:
+            schema: *id003
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    type: string
+                    maxLength: 15
+                  name_sinhala:
+                    type: string
+                    maxLength: 250
+                  name_tamil:
+                    type: string
+                    maxLength: 250
+                  name_english:
+                    type: string
+                    maxLength: 250
+                  coordinate_east:
+                    type: number
+                  coordinate_north:
+                    type: number
+                  latitude:
+                    type: number
+                  longitute:
+                    type: number
+                  gdn:
+                    properties:
+                      gnd_code:
+                        type: string
+                        maxLength: 15
+                      name_sinhala:
+                        type: string
+                        maxLength: 100
+                      name_tamil:
+                        type: string
+                        maxLength: 100
+                      name_english:
+                        type: string
+                        maxLength: 100
+                      polingdivision:
+                        properties:
+                          id:
+                            type: integer
+                            readOnly: true
+                          name_sinhala:
+                            type: string
+                            maxLength: 100
+                          name_tamil:
+                            type: string
+                            maxLength: 100
+                          name_english:
+                            type: string
+                            maxLength: 100
+                          pd_status:
+                            type: boolean
+                          electoral_district:
+                            properties:
+                              id:
+                                type: integer
+                                readOnly: true
+                              name_sinhala:
+                                type: string
+                                maxLength: 100
+                              name_tamil:
+                                type: string
+                                maxLength: 100
+                              name_english:
+                                type: string
+                                maxLength: 100
+                              ed_status:
+                                type: boolean
+                            required:
+                            - name_sinhala
+                            - name_tamil
+                            - name_english
+                            type: object
+                        required:
+                        - name_sinhala
+                        - name_tamil
+                        - name_english
+                        - electoral_district
+                        type: object
+                      gdn_status:
+                        type: boolean
+                    required:
+                    - gnd_code
+                    - name_sinhala
+                    - name_tamil
+                    - name_english
+                    - polingdivision
+                    type: object
+                  location_status:
+                    type: boolean
+                required:
+                - code
+                - name_sinhala
+                - name_tamil
+                - name_english
+                - coordinate_east
+                - coordinate_north
+                - latitude
+                - longitute
+                - gdn
+          description: ''
+  /api/gdns/:
+    get:
+      operationId: listGramaniladaridivisions
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        gnd_code:
+                          type: string
+                          maxLength: 15
+                        name_sinhala:
+                          type: string
+                          maxLength: 100
+                        name_tamil:
+                          type: string
+                          maxLength: 100
+                        name_english:
+                          type: string
+                          maxLength: 100
+                        polingdivision:
+                          properties:
+                            id:
+                              type: integer
+                              readOnly: true
+                            name_sinhala:
+                              type: string
+                              maxLength: 100
+                            name_tamil:
+                              type: string
+                              maxLength: 100
+                            name_english:
+                              type: string
+                              maxLength: 100
+                            pd_status:
+                              type: boolean
+                            electoral_district:
+                              properties:
+                                id:
+                                  type: integer
+                                  readOnly: true
+                                name_sinhala:
+                                  type: string
+                                  maxLength: 100
+                                name_tamil:
+                                  type: string
+                                  maxLength: 100
+                                name_english:
+                                  type: string
+                                  maxLength: 100
+                                ed_status:
+                                  type: boolean
+                              required:
+                              - name_sinhala
+                              - name_tamil
+                              - name_english
+                              type: object
+                          required:
+                          - name_sinhala
+                          - name_tamil
+                          - name_english
+                          - electoral_district
+                          type: object
+                        gdn_status:
+                          type: boolean
+                      required:
+                      - gnd_code
+                      - name_sinhala
+                      - name_tamil
+                      - name_english
+                      - polingdivision
+          description: ''
+    post:
+      operationId: createGramaniladaridivision
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id004
+              properties:
+                gnd_code:
+                  type: string
+                  maxLength: 15
+                name_sinhala:
+                  type: string
+                  maxLength: 100
+                name_tamil:
+                  type: string
+                  maxLength: 100
+                name_english:
+                  type: string
+                  maxLength: 100
+                polingdivision:
+                  properties:
+                    id:
+                      type: integer
+                      readOnly: true
+                    name_sinhala:
+                      type: string
+                      maxLength: 100
+                    name_tamil:
+                      type: string
+                      maxLength: 100
+                    name_english:
+                      type: string
+                      maxLength: 100
+                    pd_status:
+                      type: boolean
+                    electoral_district:
+                      properties:
+                        id:
+                          type: integer
+                          readOnly: true
+                        name_sinhala:
+                          type: string
+                          maxLength: 100
+                        name_tamil:
+                          type: string
+                          maxLength: 100
+                        name_english:
+                          type: string
+                          maxLength: 100
+                        ed_status:
+                          type: boolean
+                      required:
+                      - name_sinhala
+                      - name_tamil
+                      - name_english
+                      type: object
+                  required:
+                  - name_sinhala
+                  - name_tamil
+                  - name_english
+                  - electoral_district
+                  type: object
+                gdn_status:
+                  type: boolean
+              required:
+              - gnd_code
+              - name_sinhala
+              - name_tamil
+              - name_english
+              - polingdivision
+          application/x-www-form-urlencoded:
+            schema: *id004
+          multipart/form-data:
+            schema: *id004
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  gnd_code:
+                    type: string
+                    maxLength: 15
+                  name_sinhala:
+                    type: string
+                    maxLength: 100
+                  name_tamil:
+                    type: string
+                    maxLength: 100
+                  name_english:
+                    type: string
+                    maxLength: 100
+                  polingdivision:
+                    properties:
+                      id:
+                        type: integer
+                        readOnly: true
+                      name_sinhala:
+                        type: string
+                        maxLength: 100
+                      name_tamil:
+                        type: string
+                        maxLength: 100
+                      name_english:
+                        type: string
+                        maxLength: 100
+                      pd_status:
+                        type: boolean
+                      electoral_district:
+                        properties:
+                          id:
+                            type: integer
+                            readOnly: true
+                          name_sinhala:
+                            type: string
+                            maxLength: 100
+                          name_tamil:
+                            type: string
+                            maxLength: 100
+                          name_english:
+                            type: string
+                            maxLength: 100
+                          ed_status:
+                            type: boolean
+                        required:
+                        - name_sinhala
+                        - name_tamil
+                        - name_english
+                        type: object
+                    required:
+                    - name_sinhala
+                    - name_tamil
+                    - name_english
+                    - electoral_district
+                    type: object
+                  gdn_status:
+                    type: boolean
+                required:
+                - gnd_code
+                - name_sinhala
+                - name_tamil
+                - name_english
+                - polingdivision
+          description: ''
+  /api/gdns/{gnd_code}/:
+    get:
+      operationId: retrieveGramaniladaridivision
+      description: ''
+      parameters:
+      - name: gnd_code
+        in: path
+        required: true
+        description: A unique value identifying this gramaniladaridivision.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  gnd_code:
+                    type: string
+                    maxLength: 15
+                  name_sinhala:
+                    type: string
+                    maxLength: 100
+                  name_tamil:
+                    type: string
+                    maxLength: 100
+                  name_english:
+                    type: string
+                    maxLength: 100
+                  polingdivision:
+                    properties:
+                      id:
+                        type: integer
+                        readOnly: true
+                      name_sinhala:
+                        type: string
+                        maxLength: 100
+                      name_tamil:
+                        type: string
+                        maxLength: 100
+                      name_english:
+                        type: string
+                        maxLength: 100
+                      pd_status:
+                        type: boolean
+                      electoral_district:
+                        properties:
+                          id:
+                            type: integer
+                            readOnly: true
+                          name_sinhala:
+                            type: string
+                            maxLength: 100
+                          name_tamil:
+                            type: string
+                            maxLength: 100
+                          name_english:
+                            type: string
+                            maxLength: 100
+                          ed_status:
+                            type: boolean
+                        required:
+                        - name_sinhala
+                        - name_tamil
+                        - name_english
+                        type: object
+                    required:
+                    - name_sinhala
+                    - name_tamil
+                    - name_english
+                    - electoral_district
+                    type: object
+                  gdn_status:
+                    type: boolean
+                required:
+                - gnd_code
+                - name_sinhala
+                - name_tamil
+                - name_english
+                - polingdivision
+          description: ''
+    put:
+      operationId: updateGramaniladaridivision
+      description: ''
+      parameters:
+      - name: gnd_code
+        in: path
+        required: true
+        description: A unique value identifying this gramaniladaridivision.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id005
+              properties:
+                gnd_code:
+                  type: string
+                  maxLength: 15
+                name_sinhala:
+                  type: string
+                  maxLength: 100
+                name_tamil:
+                  type: string
+                  maxLength: 100
+                name_english:
+                  type: string
+                  maxLength: 100
+                polingdivision:
+                  properties:
+                    id:
+                      type: integer
+                      readOnly: true
+                    name_sinhala:
+                      type: string
+                      maxLength: 100
+                    name_tamil:
+                      type: string
+                      maxLength: 100
+                    name_english:
+                      type: string
+                      maxLength: 100
+                    pd_status:
+                      type: boolean
+                    electoral_district:
+                      properties:
+                        id:
+                          type: integer
+                          readOnly: true
+                        name_sinhala:
+                          type: string
+                          maxLength: 100
+                        name_tamil:
+                          type: string
+                          maxLength: 100
+                        name_english:
+                          type: string
+                          maxLength: 100
+                        ed_status:
+                          type: boolean
+                      required:
+                      - name_sinhala
+                      - name_tamil
+                      - name_english
+                      type: object
+                  required:
+                  - name_sinhala
+                  - name_tamil
+                  - name_english
+                  - electoral_district
+                  type: object
+                gdn_status:
+                  type: boolean
+              required:
+              - gnd_code
+              - name_sinhala
+              - name_tamil
+              - name_english
+              - polingdivision
+          application/x-www-form-urlencoded:
+            schema: *id005
+          multipart/form-data:
+            schema: *id005
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  gnd_code:
+                    type: string
+                    maxLength: 15
+                  name_sinhala:
+                    type: string
+                    maxLength: 100
+                  name_tamil:
+                    type: string
+                    maxLength: 100
+                  name_english:
+                    type: string
+                    maxLength: 100
+                  polingdivision:
+                    properties:
+                      id:
+                        type: integer
+                        readOnly: true
+                      name_sinhala:
+                        type: string
+                        maxLength: 100
+                      name_tamil:
+                        type: string
+                        maxLength: 100
+                      name_english:
+                        type: string
+                        maxLength: 100
+                      pd_status:
+                        type: boolean
+                      electoral_district:
+                        properties:
+                          id:
+                            type: integer
+                            readOnly: true
+                          name_sinhala:
+                            type: string
+                            maxLength: 100
+                          name_tamil:
+                            type: string
+                            maxLength: 100
+                          name_english:
+                            type: string
+                            maxLength: 100
+                          ed_status:
+                            type: boolean
+                        required:
+                        - name_sinhala
+                        - name_tamil
+                        - name_english
+                        type: object
+                    required:
+                    - name_sinhala
+                    - name_tamil
+                    - name_english
+                    - electoral_district
+                    type: object
+                  gdn_status:
+                    type: boolean
+                required:
+                - gnd_code
+                - name_sinhala
+                - name_tamil
+                - name_english
+                - polingdivision
+          description: ''
+    patch:
+      operationId: partial_updateGramaniladaridivision
+      description: ''
+      parameters:
+      - name: gnd_code
+        in: path
+        required: true
+        description: A unique value identifying this gramaniladaridivision.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id006
+              properties:
+                gnd_code:
+                  type: string
+                  maxLength: 15
+                name_sinhala:
+                  type: string
+                  maxLength: 100
+                name_tamil:
+                  type: string
+                  maxLength: 100
+                name_english:
+                  type: string
+                  maxLength: 100
+                polingdivision:
+                  properties:
+                    id:
+                      type: integer
+                      readOnly: true
+                    name_sinhala:
+                      type: string
+                      maxLength: 100
+                    name_tamil:
+                      type: string
+                      maxLength: 100
+                    name_english:
+                      type: string
+                      maxLength: 100
+                    pd_status:
+                      type: boolean
+                    electoral_district:
+                      properties:
+                        id:
+                          type: integer
+                          readOnly: true
+                        name_sinhala:
+                          type: string
+                          maxLength: 100
+                        name_tamil:
+                          type: string
+                          maxLength: 100
+                        name_english:
+                          type: string
+                          maxLength: 100
+                        ed_status:
+                          type: boolean
+                      required:
+                      - name_sinhala
+                      - name_tamil
+                      - name_english
+                      type: object
+                  required:
+                  - name_sinhala
+                  - name_tamil
+                  - name_english
+                  - electoral_district
+                  type: object
+                gdn_status:
+                  type: boolean
+          application/x-www-form-urlencoded:
+            schema: *id006
+          multipart/form-data:
+            schema: *id006
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  gnd_code:
+                    type: string
+                    maxLength: 15
+                  name_sinhala:
+                    type: string
+                    maxLength: 100
+                  name_tamil:
+                    type: string
+                    maxLength: 100
+                  name_english:
+                    type: string
+                    maxLength: 100
+                  polingdivision:
+                    properties:
+                      id:
+                        type: integer
+                        readOnly: true
+                      name_sinhala:
+                        type: string
+                        maxLength: 100
+                      name_tamil:
+                        type: string
+                        maxLength: 100
+                      name_english:
+                        type: string
+                        maxLength: 100
+                      pd_status:
+                        type: boolean
+                      electoral_district:
+                        properties:
+                          id:
+                            type: integer
+                            readOnly: true
+                          name_sinhala:
+                            type: string
+                            maxLength: 100
+                          name_tamil:
+                            type: string
+                            maxLength: 100
+                          name_english:
+                            type: string
+                            maxLength: 100
+                          ed_status:
+                            type: boolean
+                        required:
+                        - name_sinhala
+                        - name_tamil
+                        - name_english
+                        type: object
+                    required:
+                    - name_sinhala
+                    - name_tamil
+                    - name_english
+                    - electoral_district
+                    type: object
+                  gdn_status:
+                    type: boolean
+                required:
+                - gnd_code
+                - name_sinhala
+                - name_tamil
+                - name_english
+                - polingdivision
+          description: ''
+  /api/polingdivisions/:
+    get:
+      operationId: listPolingdivisions
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: integer
+                          readOnly: true
+                        name_sinhala:
+                          type: string
+                          maxLength: 100
+                        name_tamil:
+                          type: string
+                          maxLength: 100
+                        name_english:
+                          type: string
+                          maxLength: 100
+                        pd_status:
+                          type: boolean
+                        electoral_district:
+                          properties:
+                            id:
+                              type: integer
+                              readOnly: true
+                            name_sinhala:
+                              type: string
+                              maxLength: 100
+                            name_tamil:
+                              type: string
+                              maxLength: 100
+                            name_english:
+                              type: string
+                              maxLength: 100
+                            ed_status:
+                              type: boolean
+                          required:
+                          - name_sinhala
+                          - name_tamil
+                          - name_english
+                          type: object
+                      required:
+                      - name_sinhala
+                      - name_tamil
+                      - name_english
+                      - electoral_district
+          description: ''
+    post:
+      operationId: createPolingdivision
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id007
+              properties:
+                name_sinhala:
+                  type: string
+                  maxLength: 100
+                name_tamil:
+                  type: string
+                  maxLength: 100
+                name_english:
+                  type: string
+                  maxLength: 100
+                pd_status:
+                  type: boolean
+                electoral_district:
+                  properties:
+                    id:
+                      type: integer
+                      readOnly: true
+                    name_sinhala:
+                      type: string
+                      maxLength: 100
+                    name_tamil:
+                      type: string
+                      maxLength: 100
+                    name_english:
+                      type: string
+                      maxLength: 100
+                    ed_status:
+                      type: boolean
+                  required:
+                  - name_sinhala
+                  - name_tamil
+                  - name_english
+                  type: object
+              required:
+              - name_sinhala
+              - name_tamil
+              - name_english
+              - electoral_district
+          application/x-www-form-urlencoded:
+            schema: *id007
+          multipart/form-data:
+            schema: *id007
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  name_sinhala:
+                    type: string
+                    maxLength: 100
+                  name_tamil:
+                    type: string
+                    maxLength: 100
+                  name_english:
+                    type: string
+                    maxLength: 100
+                  pd_status:
+                    type: boolean
+                  electoral_district:
+                    properties:
+                      id:
+                        type: integer
+                        readOnly: true
+                      name_sinhala:
+                        type: string
+                        maxLength: 100
+                      name_tamil:
+                        type: string
+                        maxLength: 100
+                      name_english:
+                        type: string
+                        maxLength: 100
+                      ed_status:
+                        type: boolean
+                    required:
+                    - name_sinhala
+                    - name_tamil
+                    - name_english
+                    type: object
+                required:
+                - name_sinhala
+                - name_tamil
+                - name_english
+                - electoral_district
+          description: ''
+  /api/polingdivisions/{id}/:
+    get:
+      operationId: retrievePolingdivision
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this polingdivision.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  name_sinhala:
+                    type: string
+                    maxLength: 100
+                  name_tamil:
+                    type: string
+                    maxLength: 100
+                  name_english:
+                    type: string
+                    maxLength: 100
+                  pd_status:
+                    type: boolean
+                  electoral_district:
+                    properties:
+                      id:
+                        type: integer
+                        readOnly: true
+                      name_sinhala:
+                        type: string
+                        maxLength: 100
+                      name_tamil:
+                        type: string
+                        maxLength: 100
+                      name_english:
+                        type: string
+                        maxLength: 100
+                      ed_status:
+                        type: boolean
+                    required:
+                    - name_sinhala
+                    - name_tamil
+                    - name_english
+                    type: object
+                required:
+                - name_sinhala
+                - name_tamil
+                - name_english
+                - electoral_district
+          description: ''
+    put:
+      operationId: updatePolingdivision
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this polingdivision.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id008
+              properties:
+                name_sinhala:
+                  type: string
+                  maxLength: 100
+                name_tamil:
+                  type: string
+                  maxLength: 100
+                name_english:
+                  type: string
+                  maxLength: 100
+                pd_status:
+                  type: boolean
+                electoral_district:
+                  properties:
+                    id:
+                      type: integer
+                      readOnly: true
+                    name_sinhala:
+                      type: string
+                      maxLength: 100
+                    name_tamil:
+                      type: string
+                      maxLength: 100
+                    name_english:
+                      type: string
+                      maxLength: 100
+                    ed_status:
+                      type: boolean
+                  required:
+                  - name_sinhala
+                  - name_tamil
+                  - name_english
+                  type: object
+              required:
+              - name_sinhala
+              - name_tamil
+              - name_english
+              - electoral_district
+          application/x-www-form-urlencoded:
+            schema: *id008
+          multipart/form-data:
+            schema: *id008
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  name_sinhala:
+                    type: string
+                    maxLength: 100
+                  name_tamil:
+                    type: string
+                    maxLength: 100
+                  name_english:
+                    type: string
+                    maxLength: 100
+                  pd_status:
+                    type: boolean
+                  electoral_district:
+                    properties:
+                      id:
+                        type: integer
+                        readOnly: true
+                      name_sinhala:
+                        type: string
+                        maxLength: 100
+                      name_tamil:
+                        type: string
+                        maxLength: 100
+                      name_english:
+                        type: string
+                        maxLength: 100
+                      ed_status:
+                        type: boolean
+                    required:
+                    - name_sinhala
+                    - name_tamil
+                    - name_english
+                    type: object
+                required:
+                - name_sinhala
+                - name_tamil
+                - name_english
+                - electoral_district
+          description: ''
+    patch:
+      operationId: partial_updatePolingdivision
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this polingdivision.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id009
+              properties:
+                name_sinhala:
+                  type: string
+                  maxLength: 100
+                name_tamil:
+                  type: string
+                  maxLength: 100
+                name_english:
+                  type: string
+                  maxLength: 100
+                pd_status:
+                  type: boolean
+                electoral_district:
+                  properties:
+                    id:
+                      type: integer
+                      readOnly: true
+                    name_sinhala:
+                      type: string
+                      maxLength: 100
+                    name_tamil:
+                      type: string
+                      maxLength: 100
+                    name_english:
+                      type: string
+                      maxLength: 100
+                    ed_status:
+                      type: boolean
+                  required:
+                  - name_sinhala
+                  - name_tamil
+                  - name_english
+                  type: object
+          application/x-www-form-urlencoded:
+            schema: *id009
+          multipart/form-data:
+            schema: *id009
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  name_sinhala:
+                    type: string
+                    maxLength: 100
+                  name_tamil:
+                    type: string
+                    maxLength: 100
+                  name_english:
+                    type: string
+                    maxLength: 100
+                  pd_status:
+                    type: boolean
+                  electoral_district:
+                    properties:
+                      id:
+                        type: integer
+                        readOnly: true
+                      name_sinhala:
+                        type: string
+                        maxLength: 100
+                      name_tamil:
+                        type: string
+                        maxLength: 100
+                      name_english:
+                        type: string
+                        maxLength: 100
+                      ed_status:
+                        type: boolean
+                    required:
+                    - name_sinhala
+                    - name_tamil
+                    - name_english
+                    type: object
+                required:
+                - name_sinhala
+                - name_tamil
+                - name_english
+                - electoral_district
+          description: ''
+  /api/electoraldistrics/:
+    get:
+      operationId: listElectroaldistricts
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: integer
+                          readOnly: true
+                        name_sinhala:
+                          type: string
+                          maxLength: 100
+                        name_tamil:
+                          type: string
+                          maxLength: 100
+                        name_english:
+                          type: string
+                          maxLength: 100
+                        ed_status:
+                          type: boolean
+                      required:
+                      - name_sinhala
+                      - name_tamil
+                      - name_english
+          description: ''
+    post:
+      operationId: createElectroaldistrict
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id010
+              properties:
+                name_sinhala:
+                  type: string
+                  maxLength: 100
+                name_tamil:
+                  type: string
+                  maxLength: 100
+                name_english:
+                  type: string
+                  maxLength: 100
+                ed_status:
+                  type: boolean
+              required:
+              - name_sinhala
+              - name_tamil
+              - name_english
+          application/x-www-form-urlencoded:
+            schema: *id010
+          multipart/form-data:
+            schema: *id010
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  name_sinhala:
+                    type: string
+                    maxLength: 100
+                  name_tamil:
+                    type: string
+                    maxLength: 100
+                  name_english:
+                    type: string
+                    maxLength: 100
+                  ed_status:
+                    type: boolean
+                required:
+                - name_sinhala
+                - name_tamil
+                - name_english
+          description: ''
+  /api/electoraldistrics/{id}/:
+    get:
+      operationId: retrieveElectroaldistrict
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this electroaldistrict.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  name_sinhala:
+                    type: string
+                    maxLength: 100
+                  name_tamil:
+                    type: string
+                    maxLength: 100
+                  name_english:
+                    type: string
+                    maxLength: 100
+                  ed_status:
+                    type: boolean
+                required:
+                - name_sinhala
+                - name_tamil
+                - name_english
+          description: ''
+    put:
+      operationId: updateElectroaldistrict
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this electroaldistrict.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id011
+              properties:
+                name_sinhala:
+                  type: string
+                  maxLength: 100
+                name_tamil:
+                  type: string
+                  maxLength: 100
+                name_english:
+                  type: string
+                  maxLength: 100
+                ed_status:
+                  type: boolean
+              required:
+              - name_sinhala
+              - name_tamil
+              - name_english
+          application/x-www-form-urlencoded:
+            schema: *id011
+          multipart/form-data:
+            schema: *id011
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  name_sinhala:
+                    type: string
+                    maxLength: 100
+                  name_tamil:
+                    type: string
+                    maxLength: 100
+                  name_english:
+                    type: string
+                    maxLength: 100
+                  ed_status:
+                    type: boolean
+                required:
+                - name_sinhala
+                - name_tamil
+                - name_english
+          description: ''
+    patch:
+      operationId: partial_updateElectroaldistrict
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this electroaldistrict.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id012
+              properties:
+                name_sinhala:
+                  type: string
+                  maxLength: 100
+                name_tamil:
+                  type: string
+                  maxLength: 100
+                name_english:
+                  type: string
+                  maxLength: 100
+                ed_status:
+                  type: boolean
+          application/x-www-form-urlencoded:
+            schema: *id012
+          multipart/form-data:
+            schema: *id012
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  name_sinhala:
+                    type: string
+                    maxLength: 100
+                  name_tamil:
+                    type: string
+                    maxLength: 100
+                  name_english:
+                    type: string
+                    maxLength: 100
+                  ed_status:
+                    type: boolean
+                required:
+                - name_sinhala
+                - name_tamil
+                - name_english
+          description: ''
+  /api/admindistricts/:
+    get:
+      operationId: listAdmindistricts
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: integer
+                          readOnly: true
+                        name_sinhala:
+                          type: string
+                          maxLength: 100
+                        name_tamil:
+                          type: string
+                          maxLength: 100
+                        name_english:
+                          type: string
+                          maxLength: 100
+                        electoral_district:
+                          properties:
+                            id:
+                              type: integer
+                              readOnly: true
+                            name_sinhala:
+                              type: string
+                              maxLength: 100
+                            name_tamil:
+                              type: string
+                              maxLength: 100
+                            name_english:
+                              type: string
+                              maxLength: 100
+                            ed_status:
+                              type: boolean
+                          required:
+                          - name_sinhala
+                          - name_tamil
+                          - name_english
+                          type: object
+                        district_status:
+                          type: boolean
+                      required:
+                      - name_sinhala
+                      - name_tamil
+                      - name_english
+                      - electoral_district
+          description: ''
+    post:
+      operationId: createAdmindistrict
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id013
+              properties:
+                name_sinhala:
+                  type: string
+                  maxLength: 100
+                name_tamil:
+                  type: string
+                  maxLength: 100
+                name_english:
+                  type: string
+                  maxLength: 100
+                electoral_district:
+                  properties:
+                    id:
+                      type: integer
+                      readOnly: true
+                    name_sinhala:
+                      type: string
+                      maxLength: 100
+                    name_tamil:
+                      type: string
+                      maxLength: 100
+                    name_english:
+                      type: string
+                      maxLength: 100
+                    ed_status:
+                      type: boolean
+                  required:
+                  - name_sinhala
+                  - name_tamil
+                  - name_english
+                  type: object
+                district_status:
+                  type: boolean
+              required:
+              - name_sinhala
+              - name_tamil
+              - name_english
+              - electoral_district
+          application/x-www-form-urlencoded:
+            schema: *id013
+          multipart/form-data:
+            schema: *id013
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  name_sinhala:
+                    type: string
+                    maxLength: 100
+                  name_tamil:
+                    type: string
+                    maxLength: 100
+                  name_english:
+                    type: string
+                    maxLength: 100
+                  electoral_district:
+                    properties:
+                      id:
+                        type: integer
+                        readOnly: true
+                      name_sinhala:
+                        type: string
+                        maxLength: 100
+                      name_tamil:
+                        type: string
+                        maxLength: 100
+                      name_english:
+                        type: string
+                        maxLength: 100
+                      ed_status:
+                        type: boolean
+                    required:
+                    - name_sinhala
+                    - name_tamil
+                    - name_english
+                    type: object
+                  district_status:
+                    type: boolean
+                required:
+                - name_sinhala
+                - name_tamil
+                - name_english
+                - electoral_district
+          description: ''
+  /api/admindistricts/{id}/:
+    get:
+      operationId: retrieveAdmindistrict
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this admindistrict.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  name_sinhala:
+                    type: string
+                    maxLength: 100
+                  name_tamil:
+                    type: string
+                    maxLength: 100
+                  name_english:
+                    type: string
+                    maxLength: 100
+                  electoral_district:
+                    properties:
+                      id:
+                        type: integer
+                        readOnly: true
+                      name_sinhala:
+                        type: string
+                        maxLength: 100
+                      name_tamil:
+                        type: string
+                        maxLength: 100
+                      name_english:
+                        type: string
+                        maxLength: 100
+                      ed_status:
+                        type: boolean
+                    required:
+                    - name_sinhala
+                    - name_tamil
+                    - name_english
+                    type: object
+                  district_status:
+                    type: boolean
+                required:
+                - name_sinhala
+                - name_tamil
+                - name_english
+                - electoral_district
+          description: ''
+    put:
+      operationId: updateAdmindistrict
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this admindistrict.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id014
+              properties:
+                name_sinhala:
+                  type: string
+                  maxLength: 100
+                name_tamil:
+                  type: string
+                  maxLength: 100
+                name_english:
+                  type: string
+                  maxLength: 100
+                electoral_district:
+                  properties:
+                    id:
+                      type: integer
+                      readOnly: true
+                    name_sinhala:
+                      type: string
+                      maxLength: 100
+                    name_tamil:
+                      type: string
+                      maxLength: 100
+                    name_english:
+                      type: string
+                      maxLength: 100
+                    ed_status:
+                      type: boolean
+                  required:
+                  - name_sinhala
+                  - name_tamil
+                  - name_english
+                  type: object
+                district_status:
+                  type: boolean
+              required:
+              - name_sinhala
+              - name_tamil
+              - name_english
+              - electoral_district
+          application/x-www-form-urlencoded:
+            schema: *id014
+          multipart/form-data:
+            schema: *id014
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  name_sinhala:
+                    type: string
+                    maxLength: 100
+                  name_tamil:
+                    type: string
+                    maxLength: 100
+                  name_english:
+                    type: string
+                    maxLength: 100
+                  electoral_district:
+                    properties:
+                      id:
+                        type: integer
+                        readOnly: true
+                      name_sinhala:
+                        type: string
+                        maxLength: 100
+                      name_tamil:
+                        type: string
+                        maxLength: 100
+                      name_english:
+                        type: string
+                        maxLength: 100
+                      ed_status:
+                        type: boolean
+                    required:
+                    - name_sinhala
+                    - name_tamil
+                    - name_english
+                    type: object
+                  district_status:
+                    type: boolean
+                required:
+                - name_sinhala
+                - name_tamil
+                - name_english
+                - electoral_district
+          description: ''
+    patch:
+      operationId: partial_updateAdmindistrict
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this admindistrict.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id015
+              properties:
+                name_sinhala:
+                  type: string
+                  maxLength: 100
+                name_tamil:
+                  type: string
+                  maxLength: 100
+                name_english:
+                  type: string
+                  maxLength: 100
+                electoral_district:
+                  properties:
+                    id:
+                      type: integer
+                      readOnly: true
+                    name_sinhala:
+                      type: string
+                      maxLength: 100
+                    name_tamil:
+                      type: string
+                      maxLength: 100
+                    name_english:
+                      type: string
+                      maxLength: 100
+                    ed_status:
+                      type: boolean
+                  required:
+                  - name_sinhala
+                  - name_tamil
+                  - name_english
+                  type: object
+                district_status:
+                  type: boolean
+          application/x-www-form-urlencoded:
+            schema: *id015
+          multipart/form-data:
+            schema: *id015
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  name_sinhala:
+                    type: string
+                    maxLength: 100
+                  name_tamil:
+                    type: string
+                    maxLength: 100
+                  name_english:
+                    type: string
+                    maxLength: 100
+                  electoral_district:
+                    properties:
+                      id:
+                        type: integer
+                        readOnly: true
+                      name_sinhala:
+                        type: string
+                        maxLength: 100
+                      name_tamil:
+                        type: string
+                        maxLength: 100
+                      name_english:
+                        type: string
+                        maxLength: 100
+                      ed_status:
+                        type: boolean
+                    required:
+                    - name_sinhala
+                    - name_tamil
+                    - name_english
+                    type: object
+                  district_status:
+                    type: boolean
+                required:
+                - name_sinhala
+                - name_tamil
+                - name_english
+                - electoral_district
+          description: ''
+  /api/img/:
+    get:
+      operationId: listMedia_items
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: integer
+                          readOnly: true
+                        title:
+                          type: string
+                          maxLength: 150
+                        description:
+                          type: string
+                          maxLength: 250
+                        media:
+                          type: string
+                          format: binary
+                        file_type:
+                          type: string
+                          maxLength: 10
+                        latitude:
+                          type: number
+                          nullable: true
+                        longitude:
+                          type: number
+                          nullable: true
+                        status:
+                          type: boolean
+                        created_time:
+                          type: string
+                          format: date-time
+                          readOnly: true
+                        updated_time:
+                          type: string
+                          format: date-time
+                          readOnly: true
+                        location:
+                          type: string
+                      required:
+                      - title
+                      - description
+                      - media
+                      - file_type
+                      - location
+          description: ''
+    post:
+      operationId: createMedia_items
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id016
+              properties:
+                title:
+                  type: string
+                  maxLength: 150
+                description:
+                  type: string
+                  maxLength: 250
+                media:
+                  type: string
+                  format: binary
+                file_type:
+                  type: string
+                  maxLength: 10
+                latitude:
+                  type: number
+                  nullable: true
+                longitude:
+                  type: number
+                  nullable: true
+                status:
+                  type: boolean
+                location:
+                  type: string
+              required:
+              - title
+              - description
+              - media
+              - file_type
+              - location
+          application/x-www-form-urlencoded:
+            schema: *id016
+          multipart/form-data:
+            schema: *id016
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  title:
+                    type: string
+                    maxLength: 150
+                  description:
+                    type: string
+                    maxLength: 250
+                  media:
+                    type: string
+                    format: binary
+                  file_type:
+                    type: string
+                    maxLength: 10
+                  latitude:
+                    type: number
+                    nullable: true
+                  longitude:
+                    type: number
+                    nullable: true
+                  status:
+                    type: boolean
+                  created_time:
+                    type: string
+                    format: date-time
+                    readOnly: true
+                  updated_time:
+                    type: string
+                    format: date-time
+                    readOnly: true
+                  location:
+                    type: string
+                required:
+                - title
+                - description
+                - media
+                - file_type
+                - location
+          description: ''
+  /api/img/{id}/:
+    get:
+      operationId: retrieveMedia_items
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this media_items.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  title:
+                    type: string
+                    maxLength: 150
+                  description:
+                    type: string
+                    maxLength: 250
+                  media:
+                    type: string
+                    format: binary
+                  file_type:
+                    type: string
+                    maxLength: 10
+                  latitude:
+                    type: number
+                    nullable: true
+                  longitude:
+                    type: number
+                    nullable: true
+                  status:
+                    type: boolean
+                  created_time:
+                    type: string
+                    format: date-time
+                    readOnly: true
+                  updated_time:
+                    type: string
+                    format: date-time
+                    readOnly: true
+                  location:
+                    type: string
+                required:
+                - title
+                - description
+                - media
+                - file_type
+                - location
+          description: ''
+  /api/search/:
+    get:
+      operationId: listLocations
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        code:
+                          type: string
+                          maxLength: 15
+                        name_sinhala:
+                          type: string
+                          maxLength: 250
+                        name_tamil:
+                          type: string
+                          maxLength: 250
+                        name_english:
+                          type: string
+                          maxLength: 250
+                        coordinate_east:
+                          type: number
+                        coordinate_north:
+                          type: number
+                        latitude:
+                          type: number
+                        longitute:
+                          type: number
+                        gdn:
+                          properties:
+                            gnd_code:
+                              type: string
+                              maxLength: 15
+                            name_sinhala:
+                              type: string
+                              maxLength: 100
+                            name_tamil:
+                              type: string
+                              maxLength: 100
+                            name_english:
+                              type: string
+                              maxLength: 100
+                            polingdivision:
+                              properties:
+                                id:
+                                  type: integer
+                                  readOnly: true
+                                name_sinhala:
+                                  type: string
+                                  maxLength: 100
+                                name_tamil:
+                                  type: string
+                                  maxLength: 100
+                                name_english:
+                                  type: string
+                                  maxLength: 100
+                                pd_status:
+                                  type: boolean
+                                electoral_district:
+                                  properties:
+                                    id:
+                                      type: integer
+                                      readOnly: true
+                                    name_sinhala:
+                                      type: string
+                                      maxLength: 100
+                                    name_tamil:
+                                      type: string
+                                      maxLength: 100
+                                    name_english:
+                                      type: string
+                                      maxLength: 100
+                                    ed_status:
+                                      type: boolean
+                                  required:
+                                  - name_sinhala
+                                  - name_tamil
+                                  - name_english
+                                  type: object
+                              required:
+                              - name_sinhala
+                              - name_tamil
+                              - name_english
+                              - electoral_district
+                              type: object
+                            gdn_status:
+                              type: boolean
+                          required:
+                          - gnd_code
+                          - name_sinhala
+                          - name_tamil
+                          - name_english
+                          - polingdivision
+                          type: object
+                        location_status:
+                          type: boolean
+                      required:
+                      - code
+                      - name_sinhala
+                      - name_tamil
+                      - name_english
+                      - coordinate_east
+                      - coordinate_north
+                      - latitude
+                      - longitute
+                      - gdn
+          description: ''
+  /api/search/{code}/:
+    get:
+      operationId: retrieveLocations
+      description: ''
+      parameters:
+      - name: code
+        in: path
+        required: true
+        description: A unique value identifying this locations.
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    type: string
+                    maxLength: 15
+                  name_sinhala:
+                    type: string
+                    maxLength: 250
+                  name_tamil:
+                    type: string
+                    maxLength: 250
+                  name_english:
+                    type: string
+                    maxLength: 250
+                  coordinate_east:
+                    type: number
+                  coordinate_north:
+                    type: number
+                  latitude:
+                    type: number
+                  longitute:
+                    type: number
+                  gdn:
+                    properties:
+                      gnd_code:
+                        type: string
+                        maxLength: 15
+                      name_sinhala:
+                        type: string
+                        maxLength: 100
+                      name_tamil:
+                        type: string
+                        maxLength: 100
+                      name_english:
+                        type: string
+                        maxLength: 100
+                      polingdivision:
+                        properties:
+                          id:
+                            type: integer
+                            readOnly: true
+                          name_sinhala:
+                            type: string
+                            maxLength: 100
+                          name_tamil:
+                            type: string
+                            maxLength: 100
+                          name_english:
+                            type: string
+                            maxLength: 100
+                          pd_status:
+                            type: boolean
+                          electoral_district:
+                            properties:
+                              id:
+                                type: integer
+                                readOnly: true
+                              name_sinhala:
+                                type: string
+                                maxLength: 100
+                              name_tamil:
+                                type: string
+                                maxLength: 100
+                              name_english:
+                                type: string
+                                maxLength: 100
+                              ed_status:
+                                type: boolean
+                            required:
+                            - name_sinhala
+                            - name_tamil
+                            - name_english
+                            type: object
+                        required:
+                        - name_sinhala
+                        - name_tamil
+                        - name_english
+                        - electoral_district
+                        type: object
+                      gdn_status:
+                        type: boolean
+                    required:
+                    - gnd_code
+                    - name_sinhala
+                    - name_tamil
+                    - name_english
+                    - polingdivision
+                    type: object
+                  location_status:
+                    type: boolean
+                required:
+                - code
+                - name_sinhala
+                - name_tamil
+                - name_english
+                - coordinate_east
+                - coordinate_north
+                - latitude
+                - longitute
+                - gdn
+          description: ''
+  /api/token/:
+    post:
+      operationId: CreateTokenObtainPair
+      description: 'Takes a set of user credentials and returns an access and refresh
+        JSON web
+
+        token pair to prove the authentication of those credentials.'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id017
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                  writeOnly: true
+              required:
+              - username
+              - password
+          application/x-www-form-urlencoded:
+            schema: *id017
+          multipart/form-data:
+            schema: *id017
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  username:
+                    type: string
+                required:
+                - username
+          description: ''
+  /api/token/refresh/:
+    post:
+      operationId: CreateTokenRefresh
+      description: 'Takes a refresh type JSON web token and returns an access type
+        JSON web
+
+        token if the refresh token is valid.'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id018
+              properties:
+                refresh:
+                  type: string
+              required:
+              - refresh
+          application/x-www-form-urlencoded:
+            schema: *id018
+          multipart/form-data:
+            schema: *id018
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  refresh:
+                    type: string
+                required:
+                - refresh
+          description: ''
