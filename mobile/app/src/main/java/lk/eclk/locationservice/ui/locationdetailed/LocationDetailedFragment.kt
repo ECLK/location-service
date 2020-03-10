@@ -42,10 +42,17 @@ class LocationDetailedFragment : Fragment(), KodeinAware {
 
     private fun bindUI() {
         viewModel.location.observe(viewLifecycleOwner, Observer { location ->
+            if (location == null) return@Observer
             tv_name_sinhala.text = location.nameSinhala
             tv_name_english.text = location.nameEnglish
             tv_name_tamil.text = location.nameTamil
-
         })
+
+        viewModel.saved.observe(viewLifecycleOwner, Observer {
+            fab_save.visibility = if (it) View.GONE else View.VISIBLE
+            fab_add_images.visibility = if (it) View.VISIBLE else View.GONE
+        })
+
+        fab_save.setOnClickListener { viewModel.insertLocation() }
     }
 }

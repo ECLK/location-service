@@ -60,11 +60,11 @@ class HomeFragment : ScopedFragment(), KodeinAware {
             addAll(items)
             setOnItemClickListener { item, _ ->
                 (item as? LocationListItem)?.let {
-                    //                    val action =
-//                        SearchFragmentDirections.actionSearchFragmentToLocationDetailedFragment(
-//                            Gson().toJson(it.location)
-//                        )
-//                    navController.navigate(action)
+                                        val action =
+                        HomeFragmentDirections.actionHomeFragmentToLocationDetailedFragment(
+                            Gson().toJson(it.location)
+                        )
+                    navController.navigate(action)
                 }
             }
         }

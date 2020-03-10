@@ -14,7 +14,7 @@ interface LocationDao {
     fun upsert(location: Location)
 
     @Query("SELECT * FROM locations WHERE code = :code;")
-    fun getLocation(code: String): Location
+    fun getLocation(code: String): Location?
 
     @Query("SELECT * FROM locations")
     fun getLocations(): LiveData<List<Location>>

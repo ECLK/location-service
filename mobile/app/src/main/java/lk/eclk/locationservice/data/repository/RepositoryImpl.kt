@@ -63,7 +63,7 @@ class RepositoryImpl(
         locationDao.upsert(location)
     }
 
-    override fun getLocation(code: String): Location {
+    override fun getLocation(code: String): Location? {
         return locationDao.getLocation(code)
     }
 

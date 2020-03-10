@@ -17,6 +17,6 @@ interface Repository {
     suspend fun searchLocations(query: String?): List<Location>?
 
     fun insertLocation(location: Location)
-    fun getLocation(code: String): Location
+    fun getLocation(code: String): Location?
     fun getLocations(): LiveData<List<Location>>
 }
