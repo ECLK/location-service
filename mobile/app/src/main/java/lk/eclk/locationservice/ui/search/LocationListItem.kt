@@ -1,4 +1,4 @@
-package lk.eclk.locationservice.ui.home
+package lk.eclk.locationservice.ui.search
 
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
@@ -9,10 +9,13 @@ import lk.eclk.locationservice.models.Location
 class LocationListItem(
     private val location: Location
 ) : Item() {
-
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.apply {
             tv_name_sinhala.text = location.nameSinhala
+            tv_name_english.text = location.nameEnglish
+            tv_name_tamil.text = location.nameTamil
+            tv_path.text =
+                "${location.gdn.polingDivision.nameEnglish} > ${location.gdn.polingDivision.electoralDistrict.nameEnglish}"
         }
     }
 

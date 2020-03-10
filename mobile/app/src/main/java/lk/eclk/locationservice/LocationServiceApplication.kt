@@ -10,7 +10,7 @@ import lk.eclk.locationservice.data.remote.api.LocationServiceApiService
 import lk.eclk.locationservice.data.remote.datasources.LocationServiceApiNetworkDataSource
 import lk.eclk.locationservice.data.remote.datasources.LocationServiceApiNetworkDataSourceImpl
 import lk.eclk.locationservice.data.remote.interceptors.*
-import lk.eclk.locationservice.ui.home.HomeViewModelFactory
+import lk.eclk.locationservice.ui.search.SearchViewModelFactory
 import lk.eclk.locationservice.ui.signin.SignInViewModelFactory
 import lk.eclk.locationservice.ui.splash.SplashScreenViewModelFactory
 import org.kodein.di.Kodein
@@ -62,6 +62,6 @@ class LocationServiceApplication : Application(), KodeinAware {
         //view model factories
         bind() from provider { SplashScreenViewModelFactory(instance()) }
         bind() from provider { SignInViewModelFactory(instance(),instance()) }
-        bind() from provider { HomeViewModelFactory(instance()) }
+        bind() from provider { SearchViewModelFactory(instance()) }
     }
 }
