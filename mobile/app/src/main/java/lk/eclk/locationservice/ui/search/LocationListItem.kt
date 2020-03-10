@@ -7,7 +7,7 @@ import lk.eclk.locationservice.R
 import lk.eclk.locationservice.models.Location
 
 class LocationListItem(
-    private val location: Location
+    val location: Location
 ) : Item() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.apply {

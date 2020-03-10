@@ -62,5 +62,22 @@
         android:id="@+id/searchFragment"
         android:name="lk.eclk.locationservice.ui.search.SearchFragment"
         android:label="search_fragment"
-        tools:layout="@layout/search_fragment" />
+        tools:layout="@layout/search_fragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_locationDetailedFragment"
+            app:destination="@id/locationDetailedFragment"
+            app:enterAnim="@anim/slide_in_down"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_down"/>
+    </fragment>
+    <fragment
+        android:id="@+id/locationDetailedFragment"
+        android:name="lk.eclk.locationservice.ui.locationdetailed.LocationDetailedFragment"
+        android:label="LocationDetailedFragment"
+        tools:layout="@layout/location_detailed_fragment">
+        <argument
+            android:name="location_json"
+            app:argType="string" />
+    </fragment>
 </navigation>

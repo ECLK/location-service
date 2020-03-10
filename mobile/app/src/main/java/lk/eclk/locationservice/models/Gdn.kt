@@ -1,5 +1,6 @@
 package lk.eclk.locationservice.models
 
+import androidx.room.Embedded
 import com.google.gson.annotations.SerializedName
 import lk.eclk.locationservice.models.PolingDivision
 
@@ -15,5 +16,6 @@ data class Gdn(
     @SerializedName("name_tamil")
     val nameTamil: String,
     @SerializedName("polingdivision")
+    @Embedded(prefix = "poling_division_")
     val polingDivision: PolingDivision
 )

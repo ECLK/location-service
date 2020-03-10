@@ -100,3 +100,4 @@ dependencies {
     def work_version = "2.3.3"
     implementation "androidx.work:work-runtime-ktx:$work_version"
 }
+apply plugin: "androidx.navigation.safeargs"

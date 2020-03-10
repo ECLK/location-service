@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.search_fragment.*
@@ -27,7 +28,7 @@ class SearchFragment : Fragment(), KodeinAware, SearchMessageEvents {
     override val kodein: Kodein by closestKodein()
     private lateinit var viewModel: SearchViewModel
     private val viewModelFactory: SearchViewModelFactory by instance()
-    private lateinit var  navController:NavController
+    private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -76,6 +77,15 @@ class SearchFragment : Fragment(), KodeinAware, SearchMessageEvents {
     override fun initRecyclerView(items: List<LocationListItem>) {
         val groupAdapter = GroupAdapter<GroupieViewHolder>().apply {
             addAll(items)
+            setOnItemClickListener { item, _ ->
+                (item as? LocationListItem)?.let {
+                    val action =
+                        SearchFragmentDirections.actionSearchFragmentToLocationDetailedFragment(
+                            Gson().toJson(it.location)
+                        )
+                    navController.navigate(action)
+                }
+            }
         }
         rv_locations.apply {
             layoutManager = LinearLayoutManager(this@SearchFragment.context)
