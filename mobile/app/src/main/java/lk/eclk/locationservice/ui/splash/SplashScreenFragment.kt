@@ -13,7 +13,7 @@ import androidx.work.*
 
 import lk.eclk.locationservice.R
 import lk.eclk.locationservice.internal.AuthState
-import lk.eclk.locationservice.workers.RefreshTokenWorker
+import lk.eclk.locationservice.workers.RefreshAccessTokenWorker
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -62,7 +62,7 @@ class SplashScreenFragment : Fragment(), KodeinAware {
             .build()
 
         val periodicRefreshTokenWork =
-            PeriodicWorkRequestBuilder<RefreshTokenWorker>(4, TimeUnit.MINUTES)
+            PeriodicWorkRequestBuilder<RefreshAccessTokenWorker>(4, TimeUnit.MINUTES)
                 .setConstraints(workConstraints)
                 .build()
 

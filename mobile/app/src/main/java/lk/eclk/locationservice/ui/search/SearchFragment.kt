@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -25,6 +27,7 @@ class SearchFragment : Fragment(), KodeinAware, SearchMessageEvents {
     override val kodein: Kodein by closestKodein()
     private lateinit var viewModel: SearchViewModel
     private val viewModelFactory: SearchViewModelFactory by instance()
+    private lateinit var  navController:NavController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,10 +40,7 @@ class SearchFragment : Fragment(), KodeinAware, SearchMessageEvents {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         setHasOptionsMenu(true)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+        navController = Navigation.findNavController(view)
         viewModel = ViewModelProvider(this, viewModelFactory).get(SearchViewModel::class.java)
         bindUI()
     }

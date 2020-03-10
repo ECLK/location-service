@@ -15,7 +15,7 @@ class LocationListItem(
             tv_name_english.text = location.nameEnglish
             tv_name_tamil.text = location.nameTamil
             tv_path.text =
-                "${location.gdn.polingDivision.nameEnglish} > ${location.gdn.polingDivision.electoralDistrict.nameEnglish}"
+                "${location.gdn.polingDivision.nameEnglish} : ${location.gdn.polingDivision.electoralDistrict.nameEnglish}"
         }
     }
 

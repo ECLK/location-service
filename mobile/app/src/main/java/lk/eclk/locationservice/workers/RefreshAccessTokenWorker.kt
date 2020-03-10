@@ -14,7 +14,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import org.kodein.di.generic.instance
 
-class RefreshTokenWorker(context: Context, params: WorkerParameters) :
+class RefreshAccessTokenWorker(context: Context, params: WorkerParameters) :
     CoroutineWorker(context, params), KodeinAware {
 
     override val kodein: Kodein by closestKodein(context)

@@ -13,7 +13,7 @@ import lk.eclk.locationservice.data.repository.Repository
 import lk.eclk.locationservice.internal.ResponseStates
 import lk.eclk.locationservice.internal.eventexecutor.LiveMessageEvent
 import lk.eclk.locationservice.internal.eventexecutor.MessageEvents
-import lk.eclk.locationservice.workers.RefreshTokenWorker
+import lk.eclk.locationservice.workers.RefreshAccessTokenWorker
 import java.util.concurrent.TimeUnit
 
 class SignInViewModel(private val repository: Repository, private val context: Context) :
@@ -77,7 +77,7 @@ class SignInViewModel(private val repository: Repository, private val context: C
             .build()
 
         val periodicRefreshTokenWork =
-            PeriodicWorkRequestBuilder<RefreshTokenWorker>(4, TimeUnit.MINUTES)
+            PeriodicWorkRequestBuilder<RefreshAccessTokenWorker>(4, TimeUnit.MINUTES)
                 .setConstraints(workConstraints)
                 .build()
 
