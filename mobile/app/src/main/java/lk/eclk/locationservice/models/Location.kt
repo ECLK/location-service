@@ -1,13 +1,19 @@
 package lk.eclk.locationservice.models
 
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "locations")
 data class Location(
+    @PrimaryKey(autoGenerate = false)
     val code: String,
     @SerializedName("coordinate_east")
     val coordinateEast: Double,
     @SerializedName("coordinate_north")
     val coordinate_north: Double,
+    @Embedded(prefix = "gdn_")
     val gdn: Gdn,
     val latitude: Double,
     @SerializedName("location_status")

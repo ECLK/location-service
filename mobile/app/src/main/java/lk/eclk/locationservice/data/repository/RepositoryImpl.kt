@@ -5,6 +5,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import lk.eclk.locationservice.data.dao.LocationDao
 import lk.eclk.locationservice.data.proviers.JWTProvider
 import lk.eclk.locationservice.data.remote.datasources.LocationServiceApiNetworkDataSource
 import lk.eclk.locationservice.internal.ResponseStates
@@ -13,7 +14,8 @@ import lk.eclk.locationservice.models.Location
 
 class RepositoryImpl(
     private val jwtProvider: JWTProvider,
-    private val locationServiceApiNetworkDataSource: LocationServiceApiNetworkDataSource
+    private val locationServiceApiNetworkDataSource: LocationServiceApiNetworkDataSource,
+    private val locationDao: LocationDao
 ) : Repository {
 
     init {
@@ -56,4 +58,14 @@ class RepositoryImpl(
             return@withContext locationServiceApiNetworkDataSource.searchLocations(query)
         }
     }
+
+    override fun insertLocation(location: Location) {
+        locationDao.upsert(location)
+    }
+
+    override fun getLocation(code: String): Location? {
+        return locationDao.getLocation(code)
+    }
+
+    override fun getLocations() = locationDao.getLocations()
 }

@@ -4,11 +4,14 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import lk.eclk.locationservice.data.dao.LocationDao
+import lk.eclk.locationservice.models.Location
 
 
-@Database(entities = [], version = 1, exportSchema = false)
+@Database(entities = [Location::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     // for caching
+    abstract fun locationsDao(): LocationDao
 
     companion object {
         @Volatile

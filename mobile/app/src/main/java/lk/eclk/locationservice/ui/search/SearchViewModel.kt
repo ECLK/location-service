@@ -15,23 +15,15 @@ class SearchViewModel(private val repository: Repository) : ViewModel() {
     val liveMessageEvent = LiveMessageEvent<SearchMessageEvents>()
     private val _searching: MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
     val searching: LiveData<Boolean> = _searching
+    private val _locations = MutableLiveData<List<Location>>()
+    val locations: LiveData<List<Location>> = _locations
 
     fun searchLocations(query: String?) {
         _searching.postValue(true)
         GlobalScope.launch(Dispatchers.IO) {
             val response = repository.searchLocations(query)
             _searching.postValue(false)
-            response?.let {
-                GlobalScope.launch(Dispatchers.Main) {
-                    liveMessageEvent.sendEvent {
-                        initRecyclerView(
-                            response.toLocationListItems()
-                        )
-                    }
-                }
-            }
+            _locations.postValue(response)
         }
     }
-
-    private fun List<Location>.toLocationListItems() = this.map { LocationListItem(it) }
 }

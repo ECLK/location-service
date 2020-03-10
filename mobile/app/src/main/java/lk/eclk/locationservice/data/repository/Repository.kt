@@ -12,7 +12,11 @@ interface Repository {
 
     suspend fun signIn(username: String, password: String): ResponseStates
     fun signOut(): Boolean
-    suspend fun refreshAccessToken():ResponseStates
+    suspend fun refreshAccessToken(): ResponseStates
 
     suspend fun searchLocations(query: String?): List<Location>?
+
+    fun insertLocation(location: Location)
+    fun getLocation(code: String): Location?
+    fun getLocations(): LiveData<List<Location>>
 }

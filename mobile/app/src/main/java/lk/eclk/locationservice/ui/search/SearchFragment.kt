@@ -12,11 +12,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.search_fragment.*
 
 import lk.eclk.locationservice.R
+import lk.eclk.locationservice.models.Location
+import lk.eclk.locationservice.ui.listitems.LocationListItem
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -27,7 +30,7 @@ class SearchFragment : Fragment(), KodeinAware, SearchMessageEvents {
     override val kodein: Kodein by closestKodein()
     private lateinit var viewModel: SearchViewModel
     private val viewModelFactory: SearchViewModelFactory by instance()
-    private lateinit var  navController:NavController
+    private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,15 +74,34 @@ class SearchFragment : Fragment(), KodeinAware, SearchMessageEvents {
             progress_horizontal.visibility = if (it) View.VISIBLE else View.GONE
             if (it) initRecyclerView(emptyList())
         })
+
+        viewModel.locations.observe(viewLifecycleOwner, Observer {
+            if(it == null) return@Observer
+            initRecyclerView(it.toLocationListItems())
+        })
     }
 
     override fun initRecyclerView(items: List<LocationListItem>) {
         val groupAdapter = GroupAdapter<GroupieViewHolder>().apply {
             addAll(items)
+            setOnItemClickListener { item, _ ->
+                (item as? LocationListItem)?.let {
+                    val action =
+                        SearchFragmentDirections.actionSearchFragmentToLocationDetailedFragment(
+                            Gson().toJson(it.location)
+                        )
+                    navController.navigate(action)
+                }
+            }
         }
         rv_locations.apply {
             layoutManager = LinearLayoutManager(this@SearchFragment.context)
             adapter = groupAdapter
         }
+    }
+    private fun List<Location>.toLocationListItems() = this.map {
+        LocationListItem(
+            it
+        )
     }
 }

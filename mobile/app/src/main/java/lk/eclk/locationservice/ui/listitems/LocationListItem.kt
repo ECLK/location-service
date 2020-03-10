@@ -1,4 +1,4 @@
-package lk.eclk.locationservice.ui.search
+package lk.eclk.locationservice.ui.listitems
 
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
@@ -7,7 +7,7 @@ import lk.eclk.locationservice.R
 import lk.eclk.locationservice.models.Location
 
 class LocationListItem(
-    private val location: Location
+    val location: Location
 ) : Item() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.apply {
