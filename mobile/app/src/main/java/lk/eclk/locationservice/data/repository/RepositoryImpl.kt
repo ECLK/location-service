@@ -1,8 +1,6 @@
 package lk.eclk.locationservice.data.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -33,7 +31,7 @@ class RepositoryImpl(
 
     override suspend fun signIn(username: String, password: String): ResponseStates {
         return withContext(Dispatchers.IO) {
-            var pair = locationServiceApiNetworkDataSource.signIn(username, password)
+            val pair = locationServiceApiNetworkDataSource.signIn(username, password)
             if (pair.first != null) {
                 jwtProvider.setTokens(pair.first!!)
             }
@@ -44,7 +42,8 @@ class RepositoryImpl(
     override fun signOut() = jwtProvider.deleteTokens()
     override suspend fun refreshAccessToken(): ResponseStates {
         return withContext(Dispatchers.IO) {
-            var pair = locationServiceApiNetworkDataSource.refreshAccessToken(jwtProvider.getRefreshToken())
+            var pair =
+                locationServiceApiNetworkDataSource.refreshAccessToken(jwtProvider.getRefreshToken())
             if (pair.first != null) {
                 jwtProvider.setAccessToken(pair.first!!)
             }
@@ -54,7 +53,7 @@ class RepositoryImpl(
 
     override suspend fun searchLocations(query: String?): List<Location>? {
         return withContext(Dispatchers.IO) {
-         return@withContext locationServiceApiNetworkDataSource.searchLocations(query)?.results
+            return@withContext locationServiceApiNetworkDataSource.searchLocations(query)
         }
     }
 }

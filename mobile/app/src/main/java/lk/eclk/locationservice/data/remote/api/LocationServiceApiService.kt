@@ -7,8 +7,8 @@ import lk.eclk.locationservice.R
 import lk.eclk.locationservice.data.remote.interceptors.AuthenticityInterceptor
 import lk.eclk.locationservice.data.remote.interceptors.AuthorizationInterceptor
 import lk.eclk.locationservice.data.remote.interceptors.ConnectivityInterceptor
+import lk.eclk.locationservice.models.Location
 import lk.eclk.locationservice.data.remote.responses.TokenResponse
-import lk.eclk.locationservice.data.remote.responses.LocationResponse
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -18,22 +18,22 @@ import java.util.concurrent.TimeUnit
 interface LocationServiceApiService {
 
     @FormUrlEncoded
-    @POST("api/token/")
+    @POST("token/")
     fun signIn(
         @Field("username") username: String,
         @Field("password") password: String
     ): Deferred<TokenResponse>
 
     @FormUrlEncoded
-    @POST("api/token/refresh/")
+    @POST("token/refresh/")
     fun refreshToken(
         @Field("refresh") token: String?
     ): Deferred<TokenResponse>
 
-    @GET("api/search/")
+    @GET("search/")
     fun searchLocations(
         @Query("search") text: String?
-    ): Deferred<LocationResponse>
+    ): Deferred<List<Location>>
 
     companion object {
         operator fun invoke(

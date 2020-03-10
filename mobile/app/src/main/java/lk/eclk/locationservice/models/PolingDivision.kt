@@ -1,11 +1,8 @@
 package lk.eclk.locationservice.models
 
-import androidx.room.Embedded
 import com.google.gson.annotations.SerializedName
-import lk.eclk.locationservice.models.ElectoralDistrict
 
 data class PolingDivision(
-    @Embedded(prefix = "electoral_district_")
     @SerializedName("electoral_district")
     val electoralDistrict: ElectoralDistrict,
     val id: Int,

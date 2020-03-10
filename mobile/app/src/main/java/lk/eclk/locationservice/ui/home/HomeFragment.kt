@@ -2,7 +2,6 @@ package lk.eclk.locationservice.ui.home
 
 import android.app.SearchManager
 import android.content.Context
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -16,7 +15,6 @@ import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.home_fragment.*
 
 import lk.eclk.locationservice.R
-import lk.eclk.locationservice.models.Location
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
