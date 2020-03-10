@@ -1,4 +1,4 @@
-package lk.eclk.locationservice.ui.search
+package lk.eclk.locationservice.ui.listitems
 
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item

@@ -34,6 +34,7 @@ class LocationServiceApplication : Application(), KodeinAware {
 
         //database
         bind() from singleton { AppDatabase(instance()) }
+        bind() from singleton { instance<AppDatabase>().locationsDao() }
 
         //providers
         bind<JWTProvider>() with singleton { JWTProviderImpl(instance()) }
@@ -56,6 +57,7 @@ class LocationServiceApplication : Application(), KodeinAware {
         //Repository
         bind<Repository>() with singleton {
             RepositoryImpl(
+                instance(),
                 instance(),
                 instance()
             )

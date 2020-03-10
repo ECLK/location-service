@@ -18,6 +18,8 @@ import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.search_fragment.*
 
 import lk.eclk.locationservice.R
+import lk.eclk.locationservice.models.Location
+import lk.eclk.locationservice.ui.listitems.LocationListItem
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -72,6 +74,11 @@ class SearchFragment : Fragment(), KodeinAware, SearchMessageEvents {
             progress_horizontal.visibility = if (it) View.VISIBLE else View.GONE
             if (it) initRecyclerView(emptyList())
         })
+
+        viewModel.locations.observe(viewLifecycleOwner, Observer {
+            if(it == null) return@Observer
+            initRecyclerView(it.toLocationListItems())
+        })
     }
 
     override fun initRecyclerView(items: List<LocationListItem>) {
@@ -91,5 +98,10 @@ class SearchFragment : Fragment(), KodeinAware, SearchMessageEvents {
             layoutManager = LinearLayoutManager(this@SearchFragment.context)
             adapter = groupAdapter
         }
+    }
+    private fun List<Location>.toLocationListItems() = this.map {
+        LocationListItem(
+            it
+        )
     }
 }
