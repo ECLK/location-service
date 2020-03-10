@@ -11,6 +11,7 @@ import lk.eclk.locationservice.data.remote.datasources.LocationServiceApiNetwork
 import lk.eclk.locationservice.data.remote.datasources.LocationServiceApiNetworkDataSourceImpl
 import lk.eclk.locationservice.data.remote.interceptors.*
 import lk.eclk.locationservice.ui.home.HomeViewModelFactory
+import lk.eclk.locationservice.ui.locationdetailed.LocationDetailedViewModelFactory
 import lk.eclk.locationservice.ui.search.SearchViewModelFactory
 import lk.eclk.locationservice.ui.signin.SignInViewModelFactory
 import lk.eclk.locationservice.ui.splash.SplashScreenViewModelFactory
@@ -65,5 +66,6 @@ class LocationServiceApplication : Application(), KodeinAware {
         bind() from provider { SignInViewModelFactory(instance(),instance()) }
         bind() from provider { HomeViewModelFactory(instance()) }
         bind() from provider { SearchViewModelFactory(instance()) }
+        bind() from provider { LocationDetailedViewModelFactory(instance()) }
     }
 }
