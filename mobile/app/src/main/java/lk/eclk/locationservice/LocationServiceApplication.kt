@@ -6,14 +6,12 @@ import lk.eclk.locationservice.data.repository.RepositoryImpl
 import lk.eclk.locationservice.data.db.AppDatabase
 import lk.eclk.locationservice.data.proviers.JWTProvider
 import lk.eclk.locationservice.data.proviers.JWTProviderImpl
-import lk.eclk.locationservice.data.remote.interceptors.ConnectivityInterceptor
-import lk.eclk.locationservice.data.remote.interceptors.ConnectivityInterceptorImpl
 import lk.eclk.locationservice.data.remote.api.LocationServiceApiService
-import lk.eclk.locationservice.data.remote.datasources.AuthenticationNetworkDataSource
-import lk.eclk.locationservice.data.remote.datasources.AuthenticationNetworkDataSourceImpl
-import lk.eclk.locationservice.data.remote.interceptors.AuthenticityInterceptor
-import lk.eclk.locationservice.data.remote.interceptors.AuthenticityInterceptorImpl
+import lk.eclk.locationservice.data.remote.datasources.LocationServiceApiNetworkDataSource
+import lk.eclk.locationservice.data.remote.datasources.LocationServiceApiNetworkDataSourceImpl
+import lk.eclk.locationservice.data.remote.interceptors.*
 import lk.eclk.locationservice.ui.home.HomeViewModelFactory
+import lk.eclk.locationservice.ui.search.SearchViewModelFactory
 import lk.eclk.locationservice.ui.signin.SignInViewModelFactory
 import lk.eclk.locationservice.ui.splash.SplashScreenViewModelFactory
 import org.kodein.di.Kodein
@@ -42,13 +40,14 @@ class LocationServiceApplication : Application(), KodeinAware {
         //interceptors
         bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
         bind<AuthenticityInterceptor>() with singleton { AuthenticityInterceptorImpl() }
+        bind<AuthorizationInterceptor>() with singleton { AuthorizationInterceptorImpl(instance()) }
 
         // api services
-        bind() from singleton { LocationServiceApiService(instance(), instance(),instance()) }
+        bind() from singleton { LocationServiceApiService(instance(), instance(), instance(),instance()) }
 
         //data sources - network
-        bind<AuthenticationNetworkDataSource>() with singleton {
-            AuthenticationNetworkDataSourceImpl(
+        bind<LocationServiceApiNetworkDataSource>() with singleton {
+            LocationServiceApiNetworkDataSourceImpl(
                 instance()
             )
         }
@@ -63,7 +62,8 @@ class LocationServiceApplication : Application(), KodeinAware {
 
         //view model factories
         bind() from provider { SplashScreenViewModelFactory(instance()) }
-        bind() from provider { SignInViewModelFactory(instance()) }
+        bind() from provider { SignInViewModelFactory(instance(),instance()) }
         bind() from provider { HomeViewModelFactory(instance()) }
+        bind() from provider { SearchViewModelFactory(instance()) }
     }
 }

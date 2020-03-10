@@ -5,29 +5,41 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import kotlinx.coroutines.Deferred
 import lk.eclk.locationservice.R
 import lk.eclk.locationservice.data.remote.interceptors.AuthenticityInterceptor
+import lk.eclk.locationservice.data.remote.interceptors.AuthorizationInterceptor
 import lk.eclk.locationservice.data.remote.interceptors.ConnectivityInterceptor
+import lk.eclk.locationservice.models.Location
 import lk.eclk.locationservice.data.remote.responses.TokenResponse
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 import java.util.concurrent.TimeUnit
 
 interface LocationServiceApiService {
 
     @FormUrlEncoded
-    @POST("api/token/")
+    @POST("token/")
     fun signIn(
         @Field("username") username: String,
         @Field("password") password: String
     ): Deferred<TokenResponse>
 
+    @FormUrlEncoded
+    @POST("token/refresh/")
+    fun refreshToken(
+        @Field("refresh") token: String?
+    ): Deferred<TokenResponse>
+
+    @GET("search/")
+    fun searchLocations(
+        @Query("search") text: String?
+    ): Deferred<List<Location>>
+
     companion object {
         operator fun invoke(
             connectivityInterceptor: ConnectivityInterceptor,
             authenticityInterceptor: AuthenticityInterceptor,
+            authorizationInterceptor: AuthorizationInterceptor,
             context: Context
         ): LocationServiceApiService {
             val okHttpClient = OkHttpClient.Builder()
@@ -35,6 +47,7 @@ interface LocationServiceApiService {
                 .readTimeout(60, TimeUnit.SECONDS)
                 .addInterceptor(connectivityInterceptor)
                 .addInterceptor(authenticityInterceptor)
+                .addInterceptor(authorizationInterceptor)
                 .build()
 
             return Retrofit.Builder()
