@@ -1,6 +1,8 @@
 package lk.eclk.locationservice.models
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "media_items")
@@ -19,5 +21,10 @@ class MediaItem(
     @SerializedName("updated_time")
     val updatedTime: Long,
     @SerializedName("location_id")
-    val locationId: String
-)
+    val locationId: String,
+    @Expose
+    val state: Int
+){
+    @PrimaryKey(autoGenerate = true)
+    private var pk:Int = 0;
+}
