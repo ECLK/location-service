@@ -13,7 +13,7 @@ class ImageListItem(val mediaItem: MediaItem, private val context: Context) : It
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.apply {
             Glide.with(context)
-                .load(Base64.decode(mediaItem.media, Base64.DEFAULT))
+                .load(mediaItem.media)
                 .placeholder(R.drawable.ic_photo_size_select_actual)
                 .into(img)
             tv_title.text = mediaItem.title

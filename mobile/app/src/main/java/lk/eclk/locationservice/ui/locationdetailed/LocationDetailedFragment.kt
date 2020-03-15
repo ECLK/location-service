@@ -1,6 +1,5 @@
 package lk.eclk.locationservice.ui.locationdetailed
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -14,6 +13,8 @@ import kotlinx.android.synthetic.main.location_detailed_fragment.*
 
 import lk.eclk.locationservice.R
 import lk.eclk.locationservice.models.Location
+import lk.eclk.locationservice.models.MediaItem
+import lk.eclk.locationservice.ui.locationdetailed.bottomsheet.PickImageBottomSheetDialog
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -54,5 +55,16 @@ class LocationDetailedFragment : Fragment(), KodeinAware {
         })
 
         fab_save.setOnClickListener { viewModel.insertLocation() }
+        fab_add_images.setOnClickListener {
+            val bottomSheet = PickImageBottomSheetDialog(viewModel.location.value!!)
+            bottomSheet.listener = object : PickImageBottomSheetDialog.SaveListener {
+
+                override fun onSave(mediaItem: MediaItem, dialog: PickImageBottomSheetDialog) {
+                    Log.e("item", mediaItem.toString())
+                    dialog.dismiss()
+                }
+            }
+            bottomSheet.show(activity!!.supportFragmentManager, "bottom_sheet")
+        }
     }
 }

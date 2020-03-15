@@ -17,15 +17,15 @@
     <TextView
         android:id="@+id/tv_spinner_title"
         android:layout_width="match_parent"
-        app:layout_constraintTop_toBottomOf="@id/img"
         android:layout_height="wrap_content"
-        android:text="Title" />
+        android:text="Title"
+        app:layout_constraintTop_toBottomOf="@id/img" />
 
     <Spinner
         android:id="@+id/spinner_title"
-        app:layout_constraintTop_toBottomOf="@id/tv_spinner_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_spinner_title" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_description"
@@ -34,6 +34,7 @@
         app:layout_constraintTop_toBottomOf="@id/spinner_title">
 
         <EditText
+            android:id="@+id/et_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Description"
@@ -41,5 +42,23 @@
             android:maxLines="3" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="cancel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_description" />
+
+    <Button
+        android:id="@+id/btn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Add photo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_description" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
