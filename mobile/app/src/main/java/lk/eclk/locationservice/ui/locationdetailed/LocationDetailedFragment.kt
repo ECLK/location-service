@@ -15,7 +15,6 @@ import lk.eclk.locationservice.R
 import lk.eclk.locationservice.models.Location
 import lk.eclk.locationservice.models.MediaItem
 import lk.eclk.locationservice.ui.locationdetailed.bottomsheet.PickImageBottomSheetDialog
-import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance

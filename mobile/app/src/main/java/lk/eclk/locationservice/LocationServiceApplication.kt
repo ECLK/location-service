@@ -1,6 +1,6 @@
 package lk.eclk.locationservice
 
-import android.app.Application
+import androidx.multidex.MultiDexApplication
 import lk.eclk.locationservice.data.repository.Repository
 import lk.eclk.locationservice.data.repository.RepositoryImpl
 import lk.eclk.locationservice.data.db.AppDatabase
@@ -24,7 +24,7 @@ import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
 
 
-class LocationServiceApplication : Application(), KodeinAware {
+class LocationServiceApplication : MultiDexApplication(), KodeinAware {
 
 
     override val kodein: Kodein = Kodein.lazy {
@@ -45,7 +45,14 @@ class LocationServiceApplication : Application(), KodeinAware {
         bind<AuthorizationInterceptor>() with singleton { AuthorizationInterceptorImpl(instance()) }
 
         // api services
-        bind() from singleton { LocationServiceApiService(instance(), instance(), instance(),instance()) }
+        bind() from singleton {
+            LocationServiceApiService(
+                instance(),
+                instance(),
+                instance(),
+                instance()
+            )
+        }
 
         //data sources - network
         bind<LocationServiceApiNetworkDataSource>() with singleton {
@@ -65,7 +72,7 @@ class LocationServiceApplication : Application(), KodeinAware {
 
         //view model factories
         bind() from provider { SplashScreenViewModelFactory(instance()) }
-        bind() from provider { SignInViewModelFactory(instance(),instance()) }
+        bind() from provider { SignInViewModelFactory(instance(), instance()) }
         bind() from provider { HomeViewModelFactory(instance()) }
         bind() from provider { SearchViewModelFactory(instance()) }
         bind() from provider { LocationDetailedViewModelFactory(instance()) }
