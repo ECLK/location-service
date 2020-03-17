@@ -18,8 +18,7 @@ class LocationDetailedViewModel(private val repository: Repository) : ViewModel(
 
     fun setLocation(location: Location) {
         getLocation(location.code)
-        if (_location.value == null)
-            _location.postValue(location)
+        _location.postValue(location)
     }
 
     fun insertLocation() {
@@ -30,7 +29,7 @@ class LocationDetailedViewModel(private val repository: Repository) : ViewModel(
     private fun getLocation(code: String) {
         GlobalScope.launch(Dispatchers.IO) {
             val res = repository.getLocation(code)
-            _location.postValue(res)
+            res?.let { _location.postValue(it) }
             _saved.postValue(res != null)
         }
     }
