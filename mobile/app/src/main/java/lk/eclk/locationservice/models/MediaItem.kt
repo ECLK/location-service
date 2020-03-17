@@ -10,7 +10,6 @@ import okhttp3.RequestBody
 import java.io.File
 import java.io.FileNotFoundException
 
-
 @Entity(tableName = "media_items")
 class MediaItem(
     val id: Int,
@@ -21,7 +20,7 @@ class MediaItem(
     val fileType: String,
     val latitude: Double,
     val longitude: Double,
-    val status: Int,
+    val status: Boolean,
     @SerializedName("created_time")
     val createdTime: String,
     @SerializedName("updated_time")
@@ -32,21 +31,5 @@ class MediaItem(
     val state: Int
 ) {
     @PrimaryKey(autoGenerate = true)
-    private var pk: Int = 0;
-
-    fun String.toPartImage(): MultipartBody.Part {
-        var file = File(media)
-        if (!file.exists()) throw FileNotFoundException()
-        val requestFile: RequestBody =
-            RequestBody.create(MediaType.parse("multipart/form-data"), file)
-        return MultipartBody.Part.createFormData("media", file.name, requestFile)
-    }
-
-    fun String.toPartString(): RequestBody {
-        return RequestBody.create(MediaType.parse("multipart/form-data"), this)
-    }
-
-    fun Double.toPartDouble():RequestBody{
-        return RequestBody.create(MediaType.parse("multipart/form-data"), this.toString())
-    }
+    var pk: Int = 0;
 }

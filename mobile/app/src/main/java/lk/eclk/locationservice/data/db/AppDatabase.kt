@@ -7,9 +7,10 @@ import androidx.room.RoomDatabase
 import lk.eclk.locationservice.data.db.dao.LocationDao
 import lk.eclk.locationservice.data.db.dao.MediaItemDao
 import lk.eclk.locationservice.models.Location
+import lk.eclk.locationservice.models.MediaItem
 
 
-@Database(entities = [Location::class], version = 1, exportSchema = false)
+@Database(entities = [Location::class,MediaItem::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     // for caching
     abstract fun locationsDao(): LocationDao

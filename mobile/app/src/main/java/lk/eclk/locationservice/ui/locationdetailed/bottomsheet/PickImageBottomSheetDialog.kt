@@ -72,7 +72,7 @@ class PickImageBottomSheetDialog(private val location: Location) : BottomSheetDi
                     spinner_title.selectedItem.toString(),
                     et_description.text.toString(),
                     file!!.path,
-                    file!!.extension, 0.0, 0.0, 1, "0", "0", location.code, 0
+                    file!!.extension, 0.0, 0.0, true, "0", "0", location.code, 0
                 ), this
             )
         }

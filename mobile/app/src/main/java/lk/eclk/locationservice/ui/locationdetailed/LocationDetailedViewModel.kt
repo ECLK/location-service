@@ -36,6 +36,7 @@ class LocationDetailedViewModel(private val repository: Repository) : ViewModel(
     }
 
     fun insertMediaItem(item: MediaItem) {
+        repository.uploadMediaItem(item)
         repository.insertMediaItem(item)
     }
 }

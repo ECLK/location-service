@@ -9,7 +9,10 @@ import lk.eclk.locationservice.data.remote.interceptors.AuthorizationInterceptor
 import lk.eclk.locationservice.data.remote.interceptors.ConnectivityInterceptor
 import lk.eclk.locationservice.models.Location
 import lk.eclk.locationservice.data.remote.responses.TokenResponse
+import lk.eclk.locationservice.models.MediaItem
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
@@ -34,6 +37,19 @@ interface LocationServiceApiService {
     fun searchLocations(
         @Query("search") text: String?
     ): Deferred<List<Location>>
+
+    @Multipart
+    @POST("img/")
+    fun uploadImages(
+        @Part("title") title: RequestBody,
+        @Part("description") description: RequestBody,
+        @Part media: MultipartBody.Part,
+        @Part("file_type") fileType: RequestBody,
+        @Part("latitude") latitude: RequestBody,
+        @Part("longitude") longitude: RequestBody,
+        @Part("location") location: RequestBody
+    ):Deferred<MediaItem>
+
 
     companion object {
         operator fun invoke(

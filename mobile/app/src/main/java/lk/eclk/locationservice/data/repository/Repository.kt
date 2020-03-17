@@ -22,4 +22,5 @@ interface Repository {
     fun getLocations(): LiveData<List<Location>>
 
     fun insertMediaItem(item: MediaItem)
+    fun uploadMediaItem(item: MediaItem)
 }

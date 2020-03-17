@@ -78,4 +78,8 @@ class RepositoryImpl(
             mediaItemDao.upsert(item)
         }
     }
+
+    override fun uploadMediaItem(item: MediaItem) {
+        GlobalScope.launch { locationServiceApiNetworkDataSource.uploadImage(item) }
+    }
 }
