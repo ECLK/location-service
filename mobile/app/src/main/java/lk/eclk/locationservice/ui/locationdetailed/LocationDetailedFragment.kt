@@ -59,7 +59,7 @@ class LocationDetailedFragment : Fragment(), KodeinAware {
             bottomSheet.listener = object : PickImageBottomSheetDialog.SaveListener {
 
                 override fun onSave(mediaItem: MediaItem, dialog: PickImageBottomSheetDialog) {
-                    Log.e("item", mediaItem.toString())
+                    viewModel.insertMediaItem(mediaItem)
                     dialog.dismiss()
                 }
             }

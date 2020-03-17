@@ -5,17 +5,20 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import lk.eclk.locationservice.data.dao.LocationDao
+import lk.eclk.locationservice.data.db.dao.LocationDao
+import lk.eclk.locationservice.data.db.dao.MediaItemDao
 import lk.eclk.locationservice.data.proviers.JWTProvider
 import lk.eclk.locationservice.data.remote.datasources.LocationServiceApiNetworkDataSource
 import lk.eclk.locationservice.internal.ResponseStates
 import lk.eclk.locationservice.internal.AuthState
 import lk.eclk.locationservice.models.Location
+import lk.eclk.locationservice.models.MediaItem
 
 class RepositoryImpl(
     private val jwtProvider: JWTProvider,
     private val locationServiceApiNetworkDataSource: LocationServiceApiNetworkDataSource,
-    private val locationDao: LocationDao
+    private val locationDao: LocationDao,
+    private val mediaItemDao: MediaItemDao
 ) : Repository {
 
     init {
@@ -60,7 +63,9 @@ class RepositoryImpl(
     }
 
     override fun insertLocation(location: Location) {
-        locationDao.upsert(location)
+        GlobalScope.launch {
+            locationDao.upsert(location)
+        }
     }
 
     override fun getLocation(code: String): Location? {
@@ -68,4 +73,9 @@ class RepositoryImpl(
     }
 
     override fun getLocations() = locationDao.getLocations()
+    override fun insertMediaItem(item: MediaItem) {
+        GlobalScope.launch(Dispatchers.IO) {
+            mediaItemDao.upsert(item)
+        }
+    }
 }

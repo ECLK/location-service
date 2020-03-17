@@ -35,6 +35,7 @@ class LocationServiceApplication : MultiDexApplication(), KodeinAware {
         //database
         bind() from singleton { AppDatabase(instance()) }
         bind() from singleton { instance<AppDatabase>().locationsDao() }
+        bind() from singleton { instance<AppDatabase>().mediaItemDao() }
 
         //providers
         bind<JWTProvider>() with singleton { JWTProviderImpl(instance()) }
@@ -64,6 +65,7 @@ class LocationServiceApplication : MultiDexApplication(), KodeinAware {
         //Repository
         bind<Repository>() with singleton {
             RepositoryImpl(
+                instance(),
                 instance(),
                 instance(),
                 instance()

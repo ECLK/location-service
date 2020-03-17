@@ -8,6 +8,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import lk.eclk.locationservice.data.repository.Repository
 import lk.eclk.locationservice.models.Location
+import lk.eclk.locationservice.models.MediaItem
 
 class LocationDetailedViewModel(private val repository: Repository) : ViewModel() {
     private val _location = MutableLiveData<Location>()
@@ -22,10 +23,8 @@ class LocationDetailedViewModel(private val repository: Repository) : ViewModel(
     }
 
     fun insertLocation() {
-        GlobalScope.launch(Dispatchers.IO) {
-            repository.insertLocation(location.value!!)
-            _saved.postValue(true)
-        }
+        repository.insertLocation(location.value!!)
+        _saved.postValue(true)
     }
 
     private fun getLocation(code: String) {
@@ -34,5 +33,9 @@ class LocationDetailedViewModel(private val repository: Repository) : ViewModel(
             _location.postValue(res)
             _saved.postValue(res != null)
         }
+    }
+
+    fun insertMediaItem(item: MediaItem) {
+        repository.insertMediaItem(item)
     }
 }

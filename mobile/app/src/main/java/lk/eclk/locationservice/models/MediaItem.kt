@@ -41,4 +41,12 @@ class MediaItem(
             RequestBody.create(MediaType.parse("multipart/form-data"), file)
         return MultipartBody.Part.createFormData("media", file.name, requestFile)
     }
+
+    fun String.toPartString(): RequestBody {
+        return RequestBody.create(MediaType.parse("multipart/form-data"), this)
+    }
+
+    fun Double.toPartDouble():RequestBody{
+        return RequestBody.create(MediaType.parse("multipart/form-data"), this.toString())
+    }
 }

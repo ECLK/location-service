@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import lk.eclk.locationservice.internal.ResponseStates
 import lk.eclk.locationservice.internal.AuthState
 import lk.eclk.locationservice.models.Location
+import lk.eclk.locationservice.models.MediaItem
 
 interface Repository {
 
@@ -19,4 +20,6 @@ interface Repository {
     fun insertLocation(location: Location)
     fun getLocation(code: String): Location?
     fun getLocations(): LiveData<List<Location>>
+
+    fun insertMediaItem(item: MediaItem)
 }

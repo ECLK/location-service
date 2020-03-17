@@ -1,4 +1,4 @@
-package lk.eclk.locationservice.data.dao
+package lk.eclk.locationservice.data.db.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
